@@ -59,10 +59,16 @@ void Calibracao::minimoBranco(){
 void Calibracao::maximoPreto(){}
 
 void Calibracao::calculeMinimoBranco(int valorEsq2,int valorEsq,int valorDir,int valorDir2){
-	if (valorEsq2 < minimoBrancoEsq2)	minimoEsq2 = valorEsq2;
-	if (valorEsq < minimoBrancoEsq)	minimoEsq = valorEsq;
-	if (valorDir < minimoBrancoDir)	minimoDir = valorDir;
-	if (valorDir2 < minimoBrancoDir2) minimoDir2 = valorDir2;
+	if (valorEsq2 < minimoBrancoEsq2)	minimoBrancoEsq2 = valorEsq2;
+	if (valorEsq < minimoBrancoEsq)	minimoBrancoEsq = valorEsq;
+	if (valorDir < minimoBrancoDir)	minimoBrancoDir = valorDir;
+	if (valorDir2 < minimoBrancoDir2) minimoBrancoDir2 = valorDir2;
+}
+void Calibracao::calculeMaximoPreto(int valorEsq2,int valorEsq,int valorDir,int valorDir2){
+	if (valorEsq2 < maximoPretoEsq2)	maximoPretoEsq2 = valorEsq2;
+	if (valorEsq < maximoPretoEsq)	maximoPretoEsq = valorEsq;
+	if (valorDir < maximoPretoDir)	maximoPretoDir = valorDir;
+	if (valorDir2 < maximoPretoDir2) maximoPretoDir2 = valorDir2;
 }
 
 
