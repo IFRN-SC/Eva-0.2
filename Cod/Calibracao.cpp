@@ -18,34 +18,28 @@ void Calibracao::run(){
 }
 
 void Calibracao::menuCalibracao(){
-	char escolha = ' ';
-	while (estiverCalibrando) {
-		Serial.println("[--+ MENU CALIBRACAO +--]");
-		Serial.println();
-		Serial.println("O QUE DESEJAS SENHOR?");
-		Serial.println();
-		Serial.println("[B] MINIMO BRANCO.");
-		Serial.println("[P] MAXIMO PRETO.");
-		Serial.println("[S] SAIR.");
-		esperarParaLer();
-		escolha = Serial.read();
+	Serial.println():
+	Serial.printf("[--+ MENU CALIBRACAO +--] \n");
+	Serial.printf("O QUE DESEJAS SENHOR? \n");
+	Serial.printf("[B] MINIMO BRANCO.\n");
+	Serial.printf("[P] MAXIMO PRETO.\n");
+	Serial.printf("[S] SALVAR. \n");
+	esperarParaLer();
+	escolha = Serial.read();
 
-		switch (escolha) {
-			case 'B':
-				minimoBranco();
-				break;
-			case 'P':
-			 	maximoPreto();
-			 	break;
-			case 'S':
-				estiverCalibrando = false;
-		}
+	switch (escolha) {
+		case 'B':
+			minimoBranco();
+			break;
+		case 'P':
+			maximoPreto();
+			break;
+	}
 	}
 }
 
-/*
+
 void Calibracao::minimoBranco(){
-	char escolha = ' ';
 	while (1){
 		Serial.println("CALIBRAR MINIMO BRANCO: ");
 		Serial.println();
@@ -62,7 +56,7 @@ void Calibracao::minimoBranco(){
 		else calculeMinimo(robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2);
 	}
 }
-*/
+
 
 void Calibracao::maximoPreto(){}
 
