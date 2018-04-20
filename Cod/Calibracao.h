@@ -35,15 +35,17 @@ private:
 	void menuCalibracao();
 	void esperarParaLer();
 	
+	String tipoCompleto;
 	char escolha;
 	
-	void minimoBranco();
-	void maximoPreto();
+	// FORMA DE PEGAR OS VALORES
 	
-	void calculeMinimoBranco();
+	void menuFormaPegarValores(char tipo);
+	void pegarUmPorUm(char tipo);
+	void pegarSimultaneamente(char tipo);
 	
-	void calculeMinimo(int valorEsq2,int valorEsq,int valorDir,int valorDir2);
-	
+	void calculeMinimoBranco(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
+	void calculeMaximoPreto(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
 	
 };
 
