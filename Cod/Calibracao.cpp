@@ -1,11 +1,16 @@
 #include "Calibracao.h"
 
 Calibracao::Calibracao() {
-	estiverCalibrando = true;
-	minimoEsq2 = 9999;
-	minimoEsq = 9999;
-	minimoDir = 9999;
-	minimoDir2 = 9999;
+	escolha = ' ';
+	minimoEsq2 = 100;
+	minimoEsq = 100;
+	minimoDir = 100;
+	minimoDir2 = 100;
+	
+	maximoPretoEsq2 = 0;
+	maximoPretoEsq = 0;
+	maximoPretoDir = 0;
+	maximoPretoDir2 = 0;
 }
 
 void Calibracao::run(){
