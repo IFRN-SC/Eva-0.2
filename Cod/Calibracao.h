@@ -15,10 +15,15 @@ public:
 	
 private:
 	
-	float minimoEsq2;
-	float minimoEsq;
-	float minimoDir;
-	float minimoDir2;
+	float minimoBrancoEsq2;
+	float minimoBrancoEsq;
+	float minimoBrancoDir;
+	float minimoBrancoDir2;
+	
+	float maximoPretoEsq2;
+	float maximoPretoEsq;
+	float maximoPretoDir;
+	float maximoPretoDir2;
 
 	void menuCalibracao();
 	void esperarParaLer();
