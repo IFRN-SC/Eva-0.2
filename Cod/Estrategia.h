@@ -25,7 +25,7 @@
 
 			(VEL -> definida em Motores.h)
 */
-#include "Calibracao.h"
+#include "Calibracao.h";
 /* !-- Será utilizada a função padrão de run().
 	   na função calibrar() Estrategia.cpp::15;
 */
