@@ -24,6 +24,11 @@ private:
 	float maximoPretoEsq;
 	float maximoPretoDir;
 	float maximoPretoDir2;
+	
+	float mediaEsq2;
+	float mediaEsq;
+	float mediaDir;
+	float mediaDir2;
 
 	void menuCalibracao();
 	void esperarParaLer();
