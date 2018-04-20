@@ -30,15 +30,19 @@ private:
 	float mediaDir;
 	float mediaDir2;
 
+	//~~~~~~~  MENU CALIBRACAO ~~~~~~~//
+	
 	void menuCalibracao();
 	void esperarParaLer();
-
+	
+	char escolha;
+	
 	void minimoBranco();
 	void maximoPreto();
 	
 	void calculeMinimo(int valorEsq2,int valorEsq,int valorDir,int valorDir2);
 	
-	char escolha;
+	
 };
 
 #endif
