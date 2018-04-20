@@ -25,12 +25,12 @@
 
 			(VEL -> definida em Motores.h)
 */
-#include "Calibracao.h";
+#include "Calibracao.h"
 /* !-- Será utilizada a função padrão de run().
 	   na função calibrar() Estrategia.cpp::15;
 */
 
-#define DISTANCIA_OBSTACULO 10; 
+#define DISTANCIA_OBSTACULO 10
 /* !-- Define a partir de qual valor retornado pelo
 	   sonar frontal o robô irá considerar que há
 	   um obstáculo em sua frente.
