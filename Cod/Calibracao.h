@@ -40,6 +40,8 @@ private:
 	void minimoBranco();
 	void maximoPreto();
 	
+	void calculeMinimoBranco();
+	
 	void calculeMinimo(int valorEsq2,int valorEsq,int valorDir,int valorDir2);
 	
 	
