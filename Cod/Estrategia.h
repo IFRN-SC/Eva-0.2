@@ -66,6 +66,8 @@ private:
 		Função que realiza a estratégia do desvio
 		de obstáculos.
 	*/
+	void alinharObstaculo(char lado);// ? Comentários
+	bool obstaculoDesalinhado(); // ? Comentários
 
 	void impulso(); // Funciona que impulsiona o robô
 	
