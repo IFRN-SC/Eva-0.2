@@ -6,10 +6,8 @@ void Estrategia::run() {
  		   a desviar do obstáculo.
  		   Se não, somente seguirá a linha.
  	*/
-	if (sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))
-		desviarObstaculo();
-	else
-		seguirLinha();
+	if (sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))	desviarObstaculo();
+	else	seguirLinha();
 }
 
 void Estrategia::calibrar(bool value) {
