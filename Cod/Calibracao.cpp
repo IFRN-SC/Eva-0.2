@@ -20,7 +20,8 @@ void Calibracao::run(){
 }
 
 void Calibracao::menuCalibracao(){
-	while(escolha != 'S') {
+	while((escolha != 'S') || (escolha != 'S')) {
+		
 		Serial.println();
 		Serial.println("[--+ MENU CALIBRACAO +--]");
 		Serial.println("O QUE DESEJAS SENHOR?");
@@ -32,9 +33,11 @@ void Calibracao::menuCalibracao(){
 
 		switch (escolha) {
 			case 'B':
+			case 'b':
 				menuFormaPegarValores('B');
 				break;
 			case 'P':
+			case 'p':
 				menuFormaPegarValores('P');
 				break;
 		}
@@ -64,13 +67,21 @@ void Calibracao::menuFormaPegarValores(char tipo){
 
 void Calibracao::pegarUmPorUm(char tipo) {
 	Serial.println();
+	Serial.println("PEGAR VALORES PARA" + tipoCompleto);
 	Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR O VALOR");
 	Serial.println("[E] maisEsq");
 	Serial.println("[e] Esq");
 	Serial.println("[d] Dir");
 	Serial.println("[D] maisDir");
+	Serial.println("[S] SALVAR");
 	esperarParaLer();
 	escolha = Serial.read();
+	
+	switch (escolha) {
+		case 'E':
+		case 'e':
+			
+	}
 }
 
 
