@@ -19,7 +19,7 @@ void Estrategia::calibrar(bool value) {
 	for (int i=10; i>=0; i--) {
 		Serial.println("Tentativa " + i);
 		delay(400);
-		if (Serial.availble()) {
+		if (Serial.available()) {
 			Serial.read();
 			calibracao.run();
 		}
