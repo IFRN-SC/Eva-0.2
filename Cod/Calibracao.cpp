@@ -1,11 +1,13 @@
 #include "Calibracao.h"
 
 Calibracao::Calibracao() {
-	escolha = ' ';
-	minimoEsq2 = 100;
-	minimoEsq = 100;
-	minimoDir = 100;
-	minimoDir2 = 100;
+	escolha = " ";
+	tipoCompleto = " ";
+	
+	minimoBrancoEsq2 = 100;
+	minimoBrancoEsq = 100;
+	minimoBrancoDir = 100;
+	minimoBrancoDir2 = 100;
 	
 	maximoPretoEsq2 = 0;
 	maximoPretoEsq = 0;
@@ -18,8 +20,8 @@ void Calibracao::run(){
 }
 
 void Calibracao::menuCalibracao(){
-	while(escolha != 'S') {
-		Serial.println():
+	while(escolha != "S") {
+		Serial.println();
 		Serial.println("[--+ MENU CALIBRACAO +--]");
 		Serial.println("O QUE DESEJAS SENHOR?");
 		Serial.println("[B] MINIMO BRANCO.");
@@ -27,13 +29,15 @@ void Calibracao::menuCalibracao(){
 		Serial.println("[S] SALVAR.");
 		esperarParaLer();
 		escolha = Serial.read();
+		escolha = escolha.toUpperCase().charAt(0);
+		
 
 		switch (escolha) {
 			case 'B':
-				minimoBranco();
+				menuFormaPegarValores('B');
 				break;
 			case 'P':
-				maximoPreto();
+				menuFormaPegarValores('P');
 				break;
 		}
 	}	
@@ -41,22 +45,25 @@ void Calibracao::menuCalibracao(){
 }
 
 
-void Calibracao::minimoBranco(){
-	while (1){
-		Serial.println("CALIBRAR MINIMO BRANCO: ");
+void Calibracao::menuFormaPegarValores(char tipo){
+	if (tipo == 'B') tipoCompleto = "MINIMO BRANCO";
+	else tipoCompleto = "MAXIMO PRETO";
+	
+	while ((escolha != 'S') && (escolha != 'U')){
+		Serial.println();
+		Serial.println("CALIBRAR "+ tipoCompleto);
 		Serial.println("DE QUE FORMA QUERES PEGAR OS VALORES?");
 		Serial.println("[S] TODOS OS SENSORES SIMULTANEAMENTE");
 		Serial.println("[U] UM POR UM");
 		esperarParaLer();
 		escolha = Serial.read();
 		
-		if (escolha == 'S') menuCalibracao();
-		else calculeMinimo(robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2);
+		if (escolha == 'S') pegarSimultaneamente(tipo);SMAR
+		else if (escolha == 'U') pegarUmPorUm(tipo);
 	}
 }
 
 
-void Calibracao::maximoPreto(){}
 
 void Calibracao::calculeMinimoBranco(int valorEsq2,int valorEsq,int valorDir,int valorDir2){
 	if (valorEsq2 < minimoBrancoEsq2)	minimoBrancoEsq2 = valorEsq2;
