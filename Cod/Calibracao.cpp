@@ -18,26 +18,25 @@ void Calibracao::run(){
 }
 
 void Calibracao::menuCalibracao(){
-	Serial.println():
-	Serial.println("[--+ MENU CALIBRACAO +--]");
-	Serial.println("O QUE DESEJAS SENHOR? ");
-	Serial.println("[B] MINIMO BRANCO.");
-	Serial.println("[P] MAXIMO PRETO.");
-	Serial.println("[S] SALVAR.");
-	esperarParaLer();
-	escolha = Serial.read();
+	while(escolha != 'S') {
+		Serial.println():
+		Serial.println("[--+ MENU CALIBRACAO +--]");
+		Serial.println("O QUE DESEJAS SENHOR?");
+		Serial.println("[B] MINIMO BRANCO.");
+		Serial.println("[P] MAXIMO PRETO.");
+		Serial.println("[S] SALVAR.");
+		esperarParaLer();
+		escolha = Serial.read();
 
-	switch (escolha) {
-		case 'B':
-			minimoBranco();
-			break;
-		case 'P':
-			maximoPreto();
-			break;
-		case 'S':
-		default:
-			menuCalibracao();
-	}
+		switch (escolha) {
+			case 'B':
+				minimoBranco();
+				break;
+			case 'P':
+				maximoPreto();
+				break;
+		}
+	}	
 	escolha = ' ';
 }
 
@@ -45,13 +44,9 @@ void Calibracao::menuCalibracao(){
 void Calibracao::minimoBranco(){
 	while (1){
 		Serial.println("CALIBRAR MINIMO BRANCO: ");
-		Serial.println();
-		Serial.println("POSICIONES OS SENSORES NO BRANCO!");
-		Serial.println();
-		Serial.println("INSIRA QUALQUER COISA PARA PEGAR OS VALORES");
-		Serial.println("[S] VOLTAR");
-		Serial.println();
-		Serial.print("R = ");
+		Serial.println("DE QUE FORMA QUERES PEGAR OS VALORES?");
+		Serial.println("[S] TODOS OS SENSORES SIMULTANEAMENTE");
+		Serial.println("[U] UM POR UM");
 		esperarParaLer();
 		escolha = Serial.read();
 		
