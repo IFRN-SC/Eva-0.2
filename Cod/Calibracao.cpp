@@ -19,11 +19,11 @@ void Calibracao::run(){
 
 void Calibracao::menuCalibracao(){
 	Serial.println():
-	Serial.printf("[--+ MENU CALIBRACAO +--] \n");
-	Serial.printf("O QUE DESEJAS SENHOR? \n");
-	Serial.printf("[B] MINIMO BRANCO.\n");
-	Serial.printf("[P] MAXIMO PRETO.\n");
-	Serial.printf("[S] SALVAR. \n");
+	Serial.println("[--+ MENU CALIBRACAO +--]");
+	Serial.println("O QUE DESEJAS SENHOR? ");
+	Serial.println("[B] MINIMO BRANCO.");
+	Serial.println("[P] MAXIMO PRETO.");
+	Serial.println("[S] SALVAR.");
 	esperarParaLer();
 	escolha = Serial.read();
 
@@ -34,8 +34,11 @@ void Calibracao::menuCalibracao(){
 		case 'P':
 			maximoPreto();
 			break;
+		case 'S':
+		default:
+			menuCalibracao();
 	}
-	}
+	escolha = ' ';
 }
 
 
