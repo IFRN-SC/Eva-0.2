@@ -28,7 +28,7 @@ private:
 	
 	void calculeMinimo(int valorEsq2,int valorEsq,int valorDir,int valorDir2);
 	
-	bool estiverCalibrando;
+	char escolha;
 };
 
 #endif
