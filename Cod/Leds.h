@@ -52,6 +52,14 @@ public:
 				break;
 		}
 	}*/
+
+	void sinalizarConfusao() {
+		while(1) {
+			digitalWrite(10, HIGH);
+			delay(300);
+			digitalWrite(11, LOW);
+		}
+	}
 };
 
 #endif
