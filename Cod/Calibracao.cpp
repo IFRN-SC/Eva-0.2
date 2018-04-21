@@ -42,7 +42,6 @@ void Calibracao::menuCalibracao(){
 				break;
 		}
 	}	
-	escolha = ' ';
 }
 
 //~~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR OS VALORES ~~~~~~~~~~~~~~~~~~~//
@@ -66,14 +65,28 @@ void Calibracao::menuFormaPegarValores(char tipo){
 }
 
 void Calibracao::pegarSimultaneamente(char tipo){
-	if (tipo == 'B') calculeMinimoBranco(
-		robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
-		robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
-	);
-	else calculeMaximoPreto(
-		robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
-		robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
-	);		
+	escolha = ' ';
+	Serial.println();
+	Serial.println("CALIBRAR "+ tipoCompleto);
+	Serial.println("POSICIONE TODOS OS SENSORES PARA PEGAR O " + tipoCompleto);
+	
+	while ((escolha != 'S') || (escolha != 'S')) {
+		Serial.println("INSIRA ALGUMA COISA PARA PEGAR OS VALORES.\n");
+		Serial.println("[S] SALVAR VALORES");
+		esperarParaLer();
+		escolha = Serial.read();
+		
+		if ((escolha != 'S') || (escolha != 'S')) continue;
+			
+		if (tipo == 'B') calculeMinimoBranco(
+			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
+			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
+		);
+		else calculeMaximoPreto(
+			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
+			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
+		);
+	}
 }
 
 
