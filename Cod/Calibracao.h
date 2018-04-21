@@ -35,7 +35,7 @@ private:
 	void menuCalibracao();
 	void esperarParaLer();
 	
-	String tipoCompleto;
+	String tipoCompleto; // Usado para concatenações
 	char escolha;
 	
 	// FORMA DE PEGAR OS VALORES
