@@ -20,7 +20,7 @@ void Calibracao::run(){
 }
 
 void Calibracao::menuCalibracao(){
-	while((escolha != 'S') || (escolha != 'S')) {
+	while((escolha != 'S') || (escolha != 's')) {
 		
 		Serial.println();
 		Serial.println("[--+ MENU CALIBRACAO +--]");
@@ -50,7 +50,7 @@ void Calibracao::menuFormaPegarValores(char tipo){
 	if (tipo == 'B') tipoCompleto = "MINIMO BRANCO";
 	else tipoCompleto = "MAXIMO PRETO";
 	
-	while ((escolha != 'S') && (escolha != 'U')){
+	while (((escolha != 'S') && (escolha != 's')) && ((escolha != 'U') && (escolha != 'u'))) {
 		Serial.println();
 		Serial.println("CALIBRAR "+ tipoCompleto);
 		Serial.println("DE QUE FORMA QUERES PEGAR OS VALORES?");
@@ -70,13 +70,13 @@ void Calibracao::pegarSimultaneamente(char tipo){
 	Serial.println("CALIBRAR "+ tipoCompleto);
 	Serial.println("POSICIONE TODOS OS SENSORES PARA PEGAR O " + tipoCompleto);
 	
-	while ((escolha != 'S') || (escolha != 'S')) {
+	while ((escolha != 'V') || (escolha != 'v')) {
 		Serial.println("INSIRA ALGUMA COISA PARA PEGAR OS VALORES.\n");
-		Serial.println("[S] SALVAR VALORES");
+		Serial.println("[V] VOLTAR");
 		esperarParaLer();
 		escolha = Serial.read();
 		
-		if ((escolha != 'S') || (escolha != 'S')) continue;
+		if ((escolha != 'V') || (escolha != 'v')) continue;
 			
 		if (tipo == 'B') calculeMinimoBranco(
 			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
