@@ -2,18 +2,23 @@
 #define ESTRATEGIA_H
  
 #include "Sensores.h"
-/* !-- Serão usadas as funções que retornam verdadeiro
-	   quando os sensores vizualiam preto.
+/* ?--
+	Serão usadas as funções que retornam verdadeiro
+	quando os sensores vizualiam preto.
 
 	   Ex.: 
 	   		1 - sensores.preto_branco_branco_branco() == true;
 		 	2 - sensores.preto_branco_preto_branco() == false;
 
 	   		1 - O sensor maisEsq viu preto.
-	   		2 - Os sensores maisEsq e Dir não viram preto.
-*/
+	   		2 - Os sensores maisEsq e Dir não viram preto.*/
+#include "Calibracao.h"
+/* ?--
+	Será utilizada a função padrão de run().
+	na função calibrar() Estrategia.cpp::15;*/
 #include "Motores.h"
-/* !-- Serão usadas funções de movimentação básica do robô.
+/* ?--
+	Serão usadas funções de movimentação básica do robô.
 	   Ex.:
 	   		1- motores.emFrente();
 	   		2- motores.recuar();
@@ -23,51 +28,58 @@
 			2 - Ordena que os motores façam o robô recuar
 			com uma velocidade padrão (VEL).
 
-			(VEL -> definida em Motores.h)
-*/
-#include "Calibracao.h"
-/* !-- Será utilizada a função padrão de run().
-	   na função calibrar() Estrategia.cpp::15;
-*/
+			(VEL -> definida em Motores.h)*/
+#include "Leds.h"
+/* ?--
+	Serão usadas funções para a comunicação
+	do robô. Exemplo:
 
+	Quando o robô não souber o que fazer,
+	ele sinalizará - sinalizarConfusao()
+	por meio de led's ou afins.*/
 #define DISTANCIA_OBSTACULO 10
-/* !-- Define a partir de qual valor retornado pelo
-	   sonar frontal o robô irá considerar que há
-	   um obstáculo em sua frente.
-*/
+/* ?--
+	Define a partir de qual valor retornado pelo
+	sonar frontal o robô irá considerar que há
+	um obstáculo em sua frente.
+	*/
 
 class Estrategia {
 public:
 	void run();
-	/* !--run > 
+	/* ?--
 		Principal função da classe Estrategia.
 		
 		Serão tratada situações em que:
 
 		- Sensores virem preto;
 		- Sensores virem verde;
-		- Sonar detectar obstáculos;
-	*/
+		- Sonar detectar obstáculos;*/
 	void calibrar(bool value);
-	/* !--calibrar >
+	/* ?--
 		Função realizada para calibrar a partir dos
 		sensores de refletância, o valor de SEPARACAO_BRANCO_PRETO.
 
-		(SEPARACAO_BRANCO_PRETO -> Calibracao.h).
-	*/
+		(SEPARACAO_BRANCO_PRETO -> Calibracao.h).*/
 private:
 	void seguirLinha();
-	/* !--seguirLinha >
+	/* ?--
 		Função que corrige a trajetória do robô
-		caso alguns dos sensores virem preto.
-	*/
+		caso os sensores virem preto.*/
+
+	//~~~ OBSTÁCULO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+	/* ?--
+		Aqui estão as funções necessárias para o desvio
+		de obstáculos.*/
+
 	void desviarObstaculo();
-	/* !--desviarObstaculo >
+	/* ?--
 		Função que realiza a estratégia do desvio
-		de obstáculos.
-	*/
-	void alinharObstaculo(char lado);// ? Comentários
-	bool obstaculoDesalinhado(); // ? Comentários
+		de obstáculos.*/
+	void alinharObstaculo(char lado);// Comentário...?
+	bool obstaculoDesalinhado(); //  Comentário...?
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 	void impulso(); // Funciona que impulsiona o robô
 	
@@ -76,6 +88,7 @@ private:
 	Calibracao calibracao;
 	Sensores sensores;
 	Motores motores;
+	Leds leds;
 };
  
  #endif
