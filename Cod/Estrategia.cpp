@@ -43,22 +43,20 @@ void Estrategia::seguirLinha() {
 	else if (sensores.preto_preto_branco_branco())						motores.virarEsquerda();
 	else if (sensores.branco_branco_preto_preto()) 						motores.virarDireita();
 	*/
+	//else if (sensores.branco_preto_preto_branco())						passarVerde();
 	else leds.sinalizarConfusao();
 }
 
 /*
-void Estrategia::passarVerde(int lado) {
-	switch (lado){
-		case 'L': // Esquerda
-			if (!sensores.branco_branco_branco_branco() &&
-				!sensores.preto_preto_preto_preto()) 
-			{
-				while(!sensores.preto_preto_preto_preto()){
-					motores.virarEixoEsq();
-				}
-			}
-			break;
-		case 'R':
+void Estrategia::passarVerde(//int lado) {
+	if (sensores.branco_preto_preto_branco()) {
+		motores.parar(200);
+		
+		while(!sensores.maisDirViuPreto()) {
+			motores.virarEixoEsq();	
+		}
+		
+		while("!sensores.")
 	}
 }
 */
