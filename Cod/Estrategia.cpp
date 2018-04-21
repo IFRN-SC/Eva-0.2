@@ -28,59 +28,13 @@ void Estrategia::calibrar(bool value) {
 
 void Estrategia::seguirLinha() {
 	/* Se todos virem branco ou preto, motores avançam.
-	*/	
-	if (sensores.branco_branco_branco_branco()
-	    || 
-	    sensores.preto_preto_preto_preto()) 
-	{
-		motores.avancar();
-	}
-	else if (sensores.branco_preto_branco_branco()) {
-		while (sensores.esqViuPreto()) {
-			motores.virarDireita();	
-		}
-		motores.parar(500);
-		//passarVerde('L');
-		impulso();
-	}	
-	else if (sensores.branco_branco_preto_branco()) {
-		while(sensores.dirViuPreto()) {
-			motores.virarEsquerda();	
-		}
-		motores.parar(500);
-		//passarVerde('R');
-		impulso();
-	}
-	else if (sensores.preto_preto_branco_branco()){
-		while(!sensores.branco_branco_branco_branco()){
-			motores.virarDireita();
-		}
-		motores.parar(0);
-		while(!sensores.preto_preto_branco_branco()){
-			motores.virarDireita();
-		}
-		motores.parar(0);
-		while(!sensores.branco_branco_branco_branco()) {
-			motores.avancar();
-		}
-		motores.parar(0);
-		impulso();
-	}
-	else if (sensores.branco_branco_preto_preto()){
-		while(!sensores.branco_branco_branco_branco()){
-			motores.virarEsquerda();
-		}
-		motores.parar(0);
-		while(!sensores.branco_branco_preto_preto()){
-			motores.virarEsquerda();
-		}
-		motores.parar(0);
-		while(!sensores.branco_branco_branco_branco()) {
-			motores.avancar();
-		}
-		motores.parar(0);
-		impulso();
-	}	
+	*/													
+	if (sensores.esqViuBranco() && sensores.dirViuBranco())				motores.avancar();
+	else if (sensores.esqViuPreto() && sensores.dirViuBranco())			motores.virarEsquerda();
+	else if (sensores.esqViuBranco() && sensores.dirViuPreto()) 		motores.virarDireita();
+	// ?? Testes virarEixo's
+	else if (sensores.preto_preto_branco_branco())						motores.virarEixoEsq();
+	else if (sensores.branco_branco_preto_preto()) 						motores.virarEixoEsq();
 	/*
 	else {
 		motores.parar(500);
