@@ -1,20 +1,20 @@
 #include "Estrategia.h"
 
 void Estrategia::run() {
- 	/* !-- Se o sonar frontal retornar um valor menor ou igual
- 		   ao valor de DISTANCIA_OBSTACULO, o robô começará
- 		   a desviar do obstáculo.
- 		   Se não, somente seguirá a linha.
- 	*/
+ 	/* ?--
+		Se o sonar frontal retornar um valor menor ou igual
+		ao valor de DISTANCIA_OBSTACULO, o robô começará
+		a desviar do obstáculo.
+		Se não, somente seguirá a linha.*/
 	if (sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))	desviarObstaculo();
 	else	seguirLinha();
 }
 
 void Estrategia::calibrar(bool value) {
-	/* !-- Verifica se queremos calibrar os valores. Passado 4 segundos,
-		se não insirirmos algo no Serial, o robô irá continuar com os valores
-		salvos na EEPROM.
-	*/
+	/* ?--
+		Verifica se queremos calibrar os valores. Passado 4 segundos,
+		se não insrirmos algo no Serial, o robô irá continuar com os valores
+		salvos na EEPROM.*/
 	Serial.println("INSIRA ALGUMA COISA PARA CALIBRAR");
 	for (int i=10; i>=0; i--) {
 		Serial.println("Tentativa " + i);
@@ -27,29 +27,23 @@ void Estrategia::calibrar(bool value) {
 }
 
 void Estrategia::seguirLinha() {
-	/* Se todos virem branco ou preto, motores avançam.
-	*/													
+	/* ?--
+		Se os sensores centrais virem branco, avançarão.
+		Caso contrário, quando um dos sensores ver preto,
+		corrigir a trajetória.*/											
 	if (sensores.esqViuBranco() && sensores.dirViuBranco())				motores.avancar();
 	else if (sensores.esqViuPreto() && sensores.dirViuBranco())			motores.virarEsquerda();
 	else if (sensores.esqViuBranco() && sensores.dirViuPreto()) 		motores.virarDireita();
+
 	// ?? Testes virarEixo's
 	else if (sensores.preto_preto_branco_branco())						motores.virarEixoEsq();
-	else if (sensores.branco_branco_preto_preto()) 						motores.virarEixoEsq();
-	/*
-	else {
-		motores.parar(500);
-		while(1){
-			motores.virarEsquerda();
-			delay(500);
-			motores.virarDireita();
-			delay(500);
-		}
-	}
-	
-	else {
-		passarVerde();	
-	}
+	else if (sensores.branco_branco_preto_preto()) 						motores.virarEixoDir();
+
+	/* ?? Se teste virarEixo's falhar:
+	else if (sensores.preto_preto_branco_branco())						motores.virarEsquerda();
+	else if (sensores.branco_branco_preto_preto()) 						motores.virarDireita();
 	*/
+	else leds.sinalizarConfusao();
 }
 
 /*
@@ -114,7 +108,7 @@ void Estrategia::desviarObstaculo(){
 	motores.avancar();
 
 
-	// ENROLADA EXPONENCIAL
+	// CURVA EXPONENCIAL
 	
 	if(pelaDireita){
 		for (int i=10; i!=0; --i){
