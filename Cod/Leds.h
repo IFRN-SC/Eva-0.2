@@ -58,6 +58,7 @@ public:
 			digitalWrite(10, HIGH);
 			delay(300);
 			digitalWrite(11, LOW);
+			delay(300);
 		}
 	}
 };
