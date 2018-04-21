@@ -60,7 +60,7 @@ void Calibracao::menuFormaPegarValores(char tipo){
 		escolha = Serial.read();
 		
 		if (escolha == 'S') pegarSimultaneamente(tipo);
-		//else if (escolha == 'U') pegarUmPorUm(tipo);
+		else if (escolha == 'U') pegarUmPorUm(tipo);
 	}
 }
 
@@ -79,11 +79,11 @@ void Calibracao::pegarSimultaneamente(char tipo){
 		if ((escolha != 'V') || (escolha != 'v')) continue;
 			
 		if (tipo == 'B') calculeMinimoBranco(
-			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
+			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),
 			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
 		);
 		else calculeMaximoPreto(
-			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
+			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),
 			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
 		);
 	}
@@ -104,19 +104,19 @@ void Calibracao::pegarUmPorUm(char tipo) {
 		escolha = Serial.read();
 
 		switch (escolha) {
-			case 'E':
+			case 'E': // Pega valor do sensor maisEsq e descarta a leitura dos outros sensores.
 				if (tipo == 'B') calculeMinimoBranco( robo.lerSensorLinhaEsq2() ,NULLBRANCO ,NULLBRANCO ,NULLBRANCO);
 				else 			  calculeMaximoPreto( robo.lerSensorLinhaEsq2() ,NULLPRETO,NULLPRETO,NULLPRETO);
 				break;
-			case 'e':
+			case 'e': // Pega valor do sensor Esq e descarta a leitura dos outros sensores.
 				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO, robo.lerSensorLinhaEsq() ,NULLBRANCO,NULLBRANCO);
 				else 			   calculeMaximoPreto(NULLPRETO, robo.lerSensorLinhaEsq() ,NULLPRETO,NULLPRETO);
 				break;
-			case 'd':
+			case 'd': // Pega valor do sensor Dir e descarta a leitura dos outros sensores.
 				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() ,NULLBRANCO);
 				else                calculeMaximoPreto(NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() ,NULLPRETO);
 				break;
-			case 'D':
+			case 'D': // Pega valor do sensor maisDir e descarta a leitura dos outros sensores.
 				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO,NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() );
 				else                 calculeMaximoPreto(NULLPRETO,NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() );
 				break;
