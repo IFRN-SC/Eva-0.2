@@ -1,5 +1,7 @@
 #include "Calibracao.h"
 
+//~~~~~~~~~~~~~~~~~~ CONSTRUTOR ~~~~~~~~~~~~~~~~~~//
+
 Calibracao::Calibracao() {
 	escolha = ' ';
 	tipoCompleto = " ";
@@ -15,9 +17,13 @@ Calibracao::Calibracao() {
 	maximoPretoDir2 = NULLPRETO;
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 void Calibracao::run(){
 	menuCalibracao();
 }
+
+//~~~~~~~~~~~~~~~~~~ MENU INICIAL ~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::menuCalibracao(){
 	while((escolha != 'S') || (escolha != 's')) {
@@ -64,6 +70,9 @@ void Calibracao::menuFormaPegarValores(char tipo){
 	}
 }
 
+
+//~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR SIMULTANEAMENTE ~~~~~~~~~~~~~~~~~~//
+
 void Calibracao::pegarSimultaneamente(char tipo){
 	escolha = ' ';
 	Serial.println();
@@ -89,6 +98,7 @@ void Calibracao::pegarSimultaneamente(char tipo){
 	}
 }
 
+//~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR UM POR UM ~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::pegarUmPorUm(char tipo) {
 	while((escolha != 'S') || (escolha != 's')) {
