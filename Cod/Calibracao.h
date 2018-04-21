@@ -3,6 +3,11 @@
 
 #include <robo_hardware.h>
 
+#define NULLPRETO 0.0	
+#define NULLBRANCO 100.0
+// !- Usados para a calibracao "Um-Por-Um"
+
+
 class Calibracao {
 public:
 
