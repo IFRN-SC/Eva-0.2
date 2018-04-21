@@ -4,15 +4,15 @@ Calibracao::Calibracao() {
 	escolha = ' ';
 	tipoCompleto = " ";
 	
-	minimoBrancoEsq2 = 100;
-	minimoBrancoEsq = 100;
-	minimoBrancoDir = 100;
-	minimoBrancoDir2 = 100;
+	minimoBrancoEsq2 = NULLBRANCO;
+	minimoBrancoEsq = NULLBRANCO;
+	minimoBrancoDir = NULLBRANCO;
+	minimoBrancoDir2 = NULLBRANCO;
 	
-	maximoPretoEsq2 = 0;
-	maximoPretoEsq = 0;
-	maximoPretoDir = 0;
-	maximoPretoDir2 = 0;
+	maximoPretoEsq2 = NULLPRETO;
+	maximoPretoEsq = NULLPRETO;
+	maximoPretoDir = NULLPRETO;
+	maximoPretoDir2 = NULLPRETO;
 }
 
 void Calibracao::run(){
@@ -90,11 +90,8 @@ void Calibracao::pegarSimultaneamente(char tipo){
 }
 
 
-
-
-/*
 void Calibracao::pegarUmPorUm(char tipo) {
-	while((escolha != 'S') || (escolha != 'S')) {
+	while((escolha != 'S') || (escolha != 's')) {
 		Serial.println();
 		Serial.println("PEGAR VALORES PARA" + tipoCompleto);
 		Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR O VALOR");
@@ -108,17 +105,24 @@ void Calibracao::pegarUmPorUm(char tipo) {
 
 		switch (escolha) {
 			case 'E':
+				if (tipo == 'B') calculeMinimoBranco( robo.lerSensorLinhaEsq2() ,NULLBRANCO ,NULLBRANCO ,NULLBRANCO);
+				else 			  calculeMaximoPreto( robo.lerSensorLinhaEsq2() ,NULLPRETO,NULLPRETO,NULLPRETO);
 				break;
 			case 'e':
+				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO, robo.lerSensorLinhaEsq() ,NULLBRANCO,NULLBRANCO);
+				else 			   calculeMaximoPreto(NULLPRETO, robo.lerSensorLinhaEsq() ,NULLPRETO,NULLPRETO);
 				break;
 			case 'd':
+				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() ,NULLBRANCO);
+				else                calculeMaximoPreto(NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() ,NULLPRETO);
 				break;
 			case 'D':
+				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO,NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() );
+				else                 calculeMaximoPreto(NULLPRETO,NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() );
 				break;
 		}
 	}
 }
-*/
 
 void Calibracao::calculeMinimoBranco (float valorEsq2,float valorEsq,float valorDir,float valorDir2) {
 	if (valorEsq2 < minimoBrancoEsq2)	minimoBrancoEsq2 = valorEsq2;
