@@ -61,42 +61,63 @@ void Calibracao::menuFormaPegarValores(char tipo){
 		escolha = Serial.read();
 		
 		if (escolha == 'S') pegarSimultaneamente(tipo);
-		else if (escolha == 'U') pegarUmPorUm(tipo);
+		//else if (escolha == 'U') pegarUmPorUm(tipo);
 	}
 }
 
+void Calibracao::pegarSimultaneamente(char tipo){
+	if (tipo == 'B') calculeMinimoBranco(
+		robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
+		robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
+	);
+	else calculeMaximoPreto(
+		robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq()
+		robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
+	);		
+}
+
+
+
+
+/*
 void Calibracao::pegarUmPorUm(char tipo) {
-	Serial.println();
-	Serial.println("PEGAR VALORES PARA" + tipoCompleto);
-	Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR O VALOR");
-	Serial.println("[E] maisEsq");
-	Serial.println("[e] Esq");
-	Serial.println("[d] Dir");
-	Serial.println("[D] maisDir");
-	Serial.println("[S] SALVAR");
-	esperarParaLer();
-	escolha = Serial.read();
-	
-	switch (escolha) {
-		case 'E':
-		case 'e':
-			
+	while((escolha != 'S') || (escolha != 'S')) {
+		Serial.println();
+		Serial.println("PEGAR VALORES PARA" + tipoCompleto);
+		Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR O VALOR");
+		Serial.println("[E] maisEsq");
+		Serial.println("[e] Esq");
+		Serial.println("[d] Dir");
+		Serial.println("[D] maisDir");
+		Serial.println("[S] SALVAR");
+		esperarParaLer();
+		escolha = Serial.read();
+
+		switch (escolha) {
+			case 'E':
+				break;
+			case 'e':
+				break;
+			case 'd':
+				break;
+			case 'D':
+				break;
+		}
 	}
 }
+*/
 
-
-
-void Calibracao::calculeMinimoBranco(float valorEsq2,float valorEsq,float valorDir,float valorDir2){
+void Calibracao::calculeMinimoBranco (float valorEsq2,float valorEsq,float valorDir,float valorDir2) {
 	if (valorEsq2 < minimoBrancoEsq2)	minimoBrancoEsq2 = valorEsq2;
-	if (valorEsq < minimoBrancoEsq)	minimoBrancoEsq = valorEsq;
-	if (valorDir < minimoBrancoDir)	minimoBrancoDir = valorDir;
-	if (valorDir2 < minimoBrancoDir2) minimoBrancoDir2 = valorDir2;
+	if (valorEsq < minimoBrancoEsq) 	minimoBrancoEsq = valorEsq;
+	if (valorDir < minimoBrancoDir) 	minimoBrancoDir = valorDir;
+	if (valorDir2 < minimoBrancoDir2) 	minimoBrancoDir2 = valorDir2;
 }
 void Calibracao::calculeMaximoPreto(float valorEsq2,float valorEsq,float valorDir,float valorDir2){
 	if (valorEsq2 < maximoPretoEsq2)	maximoPretoEsq2 = valorEsq2;
-	if (valorEsq < maximoPretoEsq)	maximoPretoEsq = valorEsq;
-	if (valorDir < maximoPretoDir)	maximoPretoDir = valorDir;
-	if (valorDir2 < maximoPretoDir2) maximoPretoDir2 = valorDir2;
+	if (valorEsq < maximoPretoEsq)		maximoPretoEsq = valorEsq;
+	if (valorDir < maximoPretoDir)		maximoPretoDir = valorDir;
+	if (valorDir2 < maximoPretoDir2) 	maximoPretoDir2 = valorDir2;
 }
 
 
