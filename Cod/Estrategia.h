@@ -83,7 +83,7 @@ private:
 
 	void impulso(); // Funciona que impulsiona o robô
 	
-	//void passarVerde();
+	//void passarVerde(char lado);
 
 	Calibracao calibracao;
 	Sensores sensores;
