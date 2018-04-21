@@ -12,11 +12,13 @@ class Calibracao {
 public:
 
 	void run();
-	float getSeparacao(){ return (media); }
 	
-	float media; 
-
 	Calibracao();
+	
+	float mediaEsq2;
+	float mediaEsq;
+	float mediaDir;
+	float mediaDir2;
 	
 private:
 	
