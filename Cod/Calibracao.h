@@ -41,7 +41,7 @@ private:
 	// FORMA DE PEGAR OS VALORES
 	
 	void menuFormaPegarValores(char tipo);
-	void pegarUmPorUm(char tipo);
+	//void pegarUmPorUm(char tipo);
 	void pegarSimultaneamente(char tipo);
 	
 	void calculeMinimoBranco(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
