@@ -2,7 +2,6 @@
 #define SENSORES_H
 
 #include <robo_hardware.h>
-#include "Calibracao.h"
 
 class Sensores {
 public:
@@ -79,11 +78,15 @@ public:
 
 	void setMinimoBranco(float valor_lido);
 	void setMaximoPreto(float valor_lido);
-	float calculeMedia(float minimoBranco,float maximoPreto);
+	void calculeMedia(float minimoBranco,float maximoPreto);
 	float getSeparacao();
 
 
+
+
 private:
+
+	calibracao_dados separacao;
 
 	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
 
