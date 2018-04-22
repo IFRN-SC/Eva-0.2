@@ -1,19 +1,20 @@
 Pendências [
 
 A fazer {
-	- Verde;
+	- Verde
 }
 
 Fazendo {
+	- Otimizar código
 	- Calibracao.h/Calibracao.cpp
 }
 
 Concluído {
+	- Cod.ino
+	- Sensores.h
 	- Motores.h
 	- Leds.h
-	- Cod.ino
 }
-
 
 
 
