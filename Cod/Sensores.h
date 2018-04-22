@@ -10,13 +10,14 @@ public:
 	//~~~~~~~~~~~ SONAR ~~~~~~~~~~~//
 
 	bool sonarViuObstaculo(int DISTANCIA_OBSTACULO);
-	/* Função usada para verificar
+	/* ?--
+		Função usada para verificar
 	   se o sonar frontal viu ou não um obstáculo.
 	   A "distância" entre o robô e o obstáculo é 
-	   definida na classe Estrategia.h - Linha: 28. 
-	*/
+	   definida na classe Estrategia.h -*/
 
-	//----------------------------//
+
+
 
 	//~~~~~~~~~ SENSORES DE REFLETÂNCIA ~~~~~~~~~//
 
@@ -72,10 +73,25 @@ public:
 	bool maisDirViuPreto();
 
 
+
+
+	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
+
+	void setMinimoBranco(float valor);
+	void setMaximoPreto(float valor);
+	float getSeparacao();
+
+
 private:
 
-	Calibracao refle_maisEsq, refle_Esq, refle_Dir, refle_maisDir;
+	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
+
+	float minimoBranco;
+	float maximoPreto;
+	float media;
 
 };
+
+static Sensores sensores;
 
 #endif
