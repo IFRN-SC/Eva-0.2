@@ -57,8 +57,13 @@ private:
 		como será feita a calibração.*/
 	void esperarParaLer();
 	/* ?--
-		"Função ferramenta" - 
+		Função ferramenta - 
 		Usada para esperar a leitura do Serial.*/
+	void esperar_Posicionamento();
+	/* ?--
+		Função ferramenta.
+		Usada para esperar o posicionamento correto
+		do(s) sensor(es).*/
 
 	char escolha; // Usada para controlar o fluxo nos menus.
 	String tipo; // Usada para determinar se será lido branco ou preto.
