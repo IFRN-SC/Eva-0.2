@@ -3,6 +3,8 @@
  
 #include "Sensores.h"
 /* ?--
+	Objeto "sensores" já instanciado na classe Sensores.h
+
 	Serão usadas as funções que retornam verdadeiro
 	quando os sensores vizualiam preto.
 
@@ -83,10 +85,9 @@ private:
 
 	void impulso(); // Funciona que impulsiona o robô
 	
-	//void passarVerde(char lado);
+	//void passarVerde();
 
 	Calibracao calibracao;
-	Sensores sensores;
 	Motores motores;
 	Leds leds;
 };
