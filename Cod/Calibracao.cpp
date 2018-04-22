@@ -4,16 +4,8 @@
 
 Calibracao::Calibracao() {
 	escolha = ' ';
-
-	minimoBrancoEsq2 = NULLBRANCO;
-	minimoBrancoEsq = NULLBRANCO;
-	minimoBrancoDir = NULLBRANCO;
-	minimoBrancoDir2 = NULLBRANCO;
-	
-	maximoPretoEsq2 = NULLPRETO;
-	maximoPretoEsq = NULLPRETO;
-	maximoPretoDir = NULLPRETO;
-	maximoPretoDir2 = NULLPRETO;
+	save = false;
+	exit = false;
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -25,7 +17,7 @@ void Calibracao::run() {
 //~~~~~~~~~~~~~~~~~~ MENU INICIAL ~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::menuCalibracao() {
-	while((escolha != 'S') || (escolha != 's')) {
+	while(!save) {
 		
 		Serial.println();
 		Serial.println("[---| MENU CALIBRACAO |---]");
@@ -33,6 +25,7 @@ void Calibracao::menuCalibracao() {
 		Serial.println("[B] MINIMO BRANCO.");
 		Serial.println("[P] MAXIMO PRETO.");
 		Serial.println("[S] SALVAR.");
+		Serial.println("[D] DESCARTAR CALIBRACAO")
 		esperarParaLer();
 		escolha = Serial.read();
 
@@ -47,54 +40,77 @@ void Calibracao::menuCalibracao() {
 				tipo = "MAXIMO PRETO";
 				menuFormaPegarValores();
 				break;
+			case 'S':
+			case 's':
+			case 'D':
+			case 'd':
+				//robo.salvarCalibracao(cali);
+				save = true;
 		}
-	}	
+	}
+	if ((escolha != 'D') && (escolha != 'd')) {
+
+		cali.refletancia_mais_esq = refletancia_lido_esq2.getSeparacao();
+		cali.refletancia_esq = refletancia_lido_esq.getSeparacao();
+		cali.refletancia_dir = refletancia_lido_dir.getSeparacao();
+		cali.refletancia_mais_dir = refletancia_lido_dir2.getSeparacao();
+
+		robo.salvarCalibracao(cali);	
+	}
 }
 
 //~~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR OS VALORES ~~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::menuFormaPegarValores() {
-	while (((escolha != 'S') && (escolha != 's')) && ((escolha != 'U') && (escolha != 'u'))) {
+	while (!exit) {
+
 		Serial.println();
 		Serial.println("CALIBRAR " + tipo);
 		Serial.println("DE QUE FORMA QUERES PEGAR OS VALORES?");
 		Serial.println("[S] TODOS OS SENSORES SIMULTANEAMENTE");
 		Serial.println("[U] UM POR UM");
+		Serial.println("[V] VOLTAR");
 		esperarParaLer();
 		escolha = Serial.read();
 		
 		if (escolha == 'S') pegarSimultaneamente();
 		else if (escolha == 'U') pegarUmPorUm();
+		else if ((escolha == 'V') || (escolha == 'v')) exit = true;
+
 	}
+	exit = false;
 }
 
 
 //~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR SIMULTANEAMENTE ~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::pegarSimultaneamente() {
-	escolha = ' ';
 	Serial.println();
 	Serial.println("CALIBRAR "+ tipo);
 	Serial.println("POSICIONE TODOS OS SENSORES PARA PEGAR O " + tipo);
 	esperar_Posicionamento();
 
 	
-	while ((escolha != 'V') || (escolha != 'v')) {
+	while (!exit) {
 		Serial.println("INSIRA ALGUMA COISA PARA PEGAR OS VALORES.\n");
 		Serial.println("[V] VOLTAR");
 		esperarParaLer();
 		escolha = Serial.read();
 		
-		if ((escolha != 'V') || (escolha != 'v')) continue;
+		if ((escolha != 'V') || (escolha != 'v')) exit = true; break;
 			
-		if (tipo == "MINIMO BRANCO") calculeMinimoBranco(
-			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),
-			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
-		);
-		else calculeMaximoPreto(
-			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),
-			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
-		);
+		if (tipo == "MINIMO BRANCO"){
+			refletancia_lido_esq2.setMinimoBranco();
+			refletancia_lido_esq.setMinimoBranco();
+			refletancia_lido_dir.setMinimoBranco();
+			refletancia_lido_dir2.setMinimoBranco();
+		}
+		else {
+			refletancia_lido_esq2.setMaximoPreto();
+			refletancia_lido_esq.setMaximoPreto();
+			refletancia_lido_dir.setMaximoPreto();
+			refletancia_lido_dir2.setMaximoPreto();
+		}
 	}
 }
 
@@ -107,56 +123,42 @@ void Calibracao::pegarUmPorUm() {
 		Serial.println("POSICIONE O SENSOR CORRETAMENTE...");
 		esperar_Posicionamento();
 
+		Serial.println();
 		Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR VALORES");
 		Serial.println("[E] maisEsq");
 		Serial.println("[e] Esq");
 		Serial.println("[d] Dir");
-		Serial.println("[D] maisDir");
+		Serial.println("[D] maisDir");+
 		Serial.println("[S] SALVAR");
 		esperarParaLer();
 		escolha = Serial.read();
 
 		switch (escolha) {
-			case 'E': // Pega valor do sensor maisEsq e descarta a leitura dos outros sensores.
-				if (tipo == "MINIMO BRANCO") calculeMinimoBranco( robo.lerSensorLinhaEsq2() ,NULLBRANCO ,NULLBRANCO ,NULLBRANCO);
-				else 			  calculeMaximoPreto( robo.lerSensorLinhaEsq2() ,NULLPRETO,NULLPRETO,NULLPRETO);
+			case 'E': 
+				if (tipo == "MINIMO BRANCO") refletancia_lido_esq2.setMinimoBranco();
+				else 						 refletancia_lido_esq2.setMaximoPreto();
 				break;
 			case 'e': // Pega valor do sensor Esq e descarta a leitura dos outros sensores.
-				if (tipo == "MINIMO BRANCO") calculeMinimoBranco(NULLBRANCO, robo.lerSensorLinhaEsq() ,NULLBRANCO,NULLBRANCO);
-				else 			   calculeMaximoPreto(NULLPRETO, robo.lerSensorLinhaEsq() ,NULLPRETO,NULLPRETO);
+				if (tipo == "MINIMO BRANCO") refletancia_lido_esq.setMinimoBranco();
+				else 						 refletancia_lido_esq.setMaximoPreto();
 				break;
 			case 'd': // Pega valor do sensor Dir e descarta a leitura dos outros sensores.
-				if (tipo == "MINIMO BRANCO") calculeMinimoBranco(NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() ,NULLBRANCO);
-				else                calculeMaximoPreto(NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() ,NULLPRETO);
+				if (tipo == "MINIMO BRANCO") refletancia_lido_dir.setMinimoBranco();
+				else 						 refletancia_lido_dir.setMaximoPreto();
 				break;
 			case 'D': // Pega valor do sensor maisDir e descarta a leitura dos outros sensores.
-				if (tipo == "MINIMO BRANCO") calculeMinimoBranco(NULLBRANCO,NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() );
-				else                 calculeMaximoPreto(NULLPRETO,NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() );
+				if (tipo == "MINIMO BRANCO") refletancia_lido_dir2.setMinimoBranco();
+				else 						 refletancia_lido_dir2.setMaximoPreto();
 				break;
 		}
 	}
 }
 
-void Calibracao::calculeMinimoBranco (float valorEsq2,float valorEsq,float valorDir,float valorDir2) {
-	if (valorEsq2 < minimoBrancoEsq2)	minimoBrancoEsq2 = valorEsq2;
-	if (valorEsq < minimoBrancoEsq) 	minimoBrancoEsq = valorEsq;
-	if (valorDir < minimoBrancoDir) 	minimoBrancoDir = valorDir;
-	if (valorDir2 < minimoBrancoDir2) 	minimoBrancoDir2 = valorDir2;
-}
-void Calibracao::calculeMaximoPreto(float valorEsq2,float valorEsq,float valorDir,float valorDir2){
-	if (valorEsq2 < maximoPretoEsq2)	maximoPretoEsq2 = valorEsq2;
-	if (valorEsq < maximoPretoEsq)		maximoPretoEsq = valorEsq;
-	if (valorDir < maximoPretoDir)		maximoPretoDir = valorDir;
-	if (valorDir2 < maximoPretoDir2) 	maximoPretoDir2 = valorDir2;
-}
-
-
-
 //~~~~~~~~~~~~ FERRAMENTAS ~~~~~~~~~~~~~//
 
 
 void Calibracao::esperar_Posicionamento() {
-	Serial.println();
+	Serial.println("INSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE.");
 	Serial.println("maisEsq		---		Esq 	---		Dir 	---		maisDir");
 	while(!Serial.read()) {
 		Serial.print(robo.lerSensorLinhaEsq2());
