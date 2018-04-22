@@ -2,13 +2,14 @@
 #define LEDS_H
 
 /* 
-//---------------- PINAGEM - LEDS --------------------//
+//---------------- 		  LEDS 	    --------------------//
  
 Futuro uso para comunicação dos sensores de refletância
-#define LED_maisEsq 9
-#define LED_Esq 10
-#define LED_Dir 11
-#define LED_maisDir 12
+#define LED_maisEsq 1
+#define LED_Esq 	2
+#define LED_Dir 	3
+#define LED_maisDir 4
+
 //-----------------------------------------------------// 
 */
 
@@ -27,31 +28,12 @@ public:
 		pinMode(11, OUTPUT);
 	}
 
-	/*
+	
 	void piscar(int led){
-		switch (led) {
-			case 1: // maisEsq viu preto.
-				digitalWrite(LED_maisEsq, HIGH);
-				delay(300);
-				digitalWrite(LED_maisEsq, LOW);
-				break;
-			case 2:
-				digitalWrite(LED_Esq, HIGH);
-				delay(500);
-				digitalWrite(LED_Esq, LOW);
-				break;
-			case 3:
-				digitalWrite(LED_Dir, HIGH);
-				delay(500);
-				digitalWrite(LED_Dir, LOW);
-				break;
-			case 4:
-				digitalWrite(LED_maisDir, HIGH);
-				delay(500);
-				digitalWrite(LED_maisDir, LOW);
-				break;
-		}
-	}*/
+		digitalWrite(led,HIGH);
+		delay(300);
+		digitalWrite(led,LOW);
+	}
 
 	void sinalizarConfusao() {
 		while(1) {
