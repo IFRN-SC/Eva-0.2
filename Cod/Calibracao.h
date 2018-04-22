@@ -2,6 +2,7 @@
 #define CALIBRACAO_H
 
 #include <robo_hardware.h>
+#include "Sensores.h"
 
 //_______________________
 #define NULLPRETO 0.0	
@@ -18,36 +19,11 @@
 
 class Calibracao {
 public:
-
 	void run();
-	
 	Calibracao();
-	
-	float mediaEsq2;
-	float mediaEsq;
-	float mediaDir;
-	float mediaDir2;
-	/* ?--
-		Variáveis que guardam a média
-		de branco_preto para todos os sensores.*/
-	
 private:
-	
-	float minimoBrancoEsq2;
-	float minimoBrancoEsq;
-	float minimoBrancoDir;
-	float minimoBrancoDir2;
-	/* ?--
-		Variáveis que guardarão o mínimo
-		valor lido para branco de cada sensor de refletância.*/
-	
-	float maximoPretoEsq2;
-	float maximoPretoEsq;
-	float maximoPretoDir;
-	float maximoPretoDir2;
-	/* ?--
-		Variáveis que guardarão o máximo
-		valores lido para branco de cada sensor de refletância.*/
+
+	calibracao_dados cali;
 
 	//~~~~~~~  MENU CALIBRACAO ~~~~~~~//
 	
@@ -65,7 +41,11 @@ private:
 		Usada para esperar o posicionamento correto
 		do(s) sensor(es).*/
 
-	char escolha; // Usada para controlar o fluxo nos menus.
+	// Variáveis usadas para controlar o fluxo nos menus.
+	char escolha; 
+	bool save;
+	bool exit;
+
 	String tipo; // Usada para determinar se será lido branco ou preto.
 	
 	//~~~ FORMA DE PEGAR OS VALORES ~~~//
@@ -73,10 +53,6 @@ private:
 	void menuFormaPegarValores();
 	void pegarUmPorUm();
 	void pegarSimultaneamente();
-	
-	void calculeMinimoBranco(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
-	void calculeMaximoPreto(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
-	
 };
 
 #endif
