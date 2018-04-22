@@ -83,8 +83,6 @@ private:
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-	void impulso(); // Funciona que impulsiona o robô
-	
 	//void passarVerde();
 
 	Calibracao calibracao;
