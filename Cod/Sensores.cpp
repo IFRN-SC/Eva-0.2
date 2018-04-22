@@ -177,35 +177,35 @@ bool Sensores::preto_branco_branco_preto() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~ INDIVIDUAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 bool Sensores::maisEsqViuBranco() {
-	return (robo.lerSensorLinhaEsq2() > 38.5);  
+	return (robo.lerSensorLinhaEsq2() > separacao.refletancia_mais_esq);  
 }
 
 bool Sensores::maisEsqViuPreto() {
-	return (robo.lerSensorLinhaEsq2() < 38.5);  
+	return (robo.lerSensorLinhaEsq2() < separacao.refletancia_mais_esq);  
 }
 
 bool Sensores::esqViuBranco() {
-	return (robo.lerSensorLinhaEsq() > 34);  
+	return (robo.lerSensorLinhaEsq() > separacao.refletancia_esq);  
 }
 
 bool Sensores::esqViuPreto() {
-	return (robo.lerSensorLinhaEsq() < 34);  
+	return (robo.lerSensorLinhaEsq() < separacao.refletancia_esq);  
 }
 
 bool Sensores::dirViuBranco() {
-	return (robo.lerSensorLinhaDir() > 43);  	
+	return (robo.lerSensorLinhaDir() > separacao.refletancia_dir);  	
 }
 
 bool Sensores::dirViuPreto() {
-	return (robo.lerSensorLinhaDir() < 43);  		
+	return (robo.lerSensorLinhaDir() < separacao.refletancia_dir);  		
 }
 
 bool Sensores::maisDirViuBranco() {
-	return (robo.lerSensorLinhaDir2() > 54);  	
+	return (robo.lerSensorLinhaDir2() > separacao.refletancia_mais_dir);  	
 }   
 
 bool Sensores::maisDirViuPreto() {
-	return (robo.lerSensorLinhaDir2() < 54);  
+	return (robo.lerSensorLinhaDir2() < separacao.refletancia_mais_dir);  
 } 
 
 
