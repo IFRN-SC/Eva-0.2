@@ -25,6 +25,12 @@ private:
 
 	calibracao_dados cali;
 
+	Sensores 
+	refletancia_lido_esq2, 
+	refletancia_lido_esq2,
+	refletancia_lido_dir, 
+	refletancia_lido_dir2;
+
 	//~~~~~~~  MENU CALIBRACAO ~~~~~~~//
 	
 	void menuCalibracao();
