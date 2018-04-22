@@ -62,19 +62,6 @@ void Estrategia::passarVerde(//int lado) {
 }
 */
 
-/*
-void Estrategia::impulso() {
-	while (sensores.branco_branco_branco_branco()
-		  || 
-		  sensores.preto_preto_preto_preto()
-		  && 
-		  (!sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))) 
-	{
-		robo.acionarMotores(60,60);	
-	}
-	motores.parar(500);
-}*/
-
 void Estrategia::desviarObstaculo(){
 	
 	//piscarLeds();
