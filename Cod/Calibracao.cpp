@@ -4,8 +4,7 @@
 
 Calibracao::Calibracao() {
 	escolha = ' ';
-	tipoCompleto = " ";
-	
+
 	minimoBrancoEsq2 = NULLBRANCO;
 	minimoBrancoEsq = NULLBRANCO;
 	minimoBrancoDir = NULLBRANCO;
@@ -29,7 +28,7 @@ void Calibracao::menuCalibracao(){
 	while((escolha != 'S') || (escolha != 's')) {
 		
 		Serial.println();
-		Serial.println("[--+ MENU CALIBRACAO +--]");
+		Serial.println("[---| MENU CALIBRACAO |---]");
 		Serial.println("O QUE DESEJAS SENHOR?");
 		Serial.println("[B] MINIMO BRANCO.");
 		Serial.println("[P] MAXIMO PRETO.");
@@ -40,11 +39,13 @@ void Calibracao::menuCalibracao(){
 		switch (escolha) {
 			case 'B':
 			case 'b':
-				menuFormaPegarValores('B');
+				tipo = "MINIMO BRANCO";
+				menuFormaPegarValores();
 				break;
 			case 'P':
 			case 'p':
-				menuFormaPegarValores('P');
+				tipo = "MAXIMO PRETO"
+				menuFormaPegarValores();
 				break;
 		}
 	}	
@@ -52,32 +53,31 @@ void Calibracao::menuCalibracao(){
 
 //~~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR OS VALORES ~~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::menuFormaPegarValores(char tipo){
-	if (tipo == 'B') tipoCompleto = "MINIMO BRANCO";
-	else tipoCompleto = "MAXIMO PRETO";
-	
+void Calibracao::menuFormaPegarValores(){
 	while (((escolha != 'S') && (escolha != 's')) && ((escolha != 'U') && (escolha != 'u'))) {
 		Serial.println();
-		Serial.println("CALIBRAR "+ tipoCompleto);
+		Serial.println("CALIBRAR " + tipo);
 		Serial.println("DE QUE FORMA QUERES PEGAR OS VALORES?");
 		Serial.println("[S] TODOS OS SENSORES SIMULTANEAMENTE");
 		Serial.println("[U] UM POR UM");
 		esperarParaLer();
 		escolha = Serial.read();
 		
-		if (escolha == 'S') pegarSimultaneamente(tipo);
-		else if (escolha == 'U') pegarUmPorUm(tipo);
+		if (escolha == 'S') pegarSimultaneamente();
+		else if (escolha == 'U') pegarUmPorUm();
 	}
 }
 
 
 //~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR SIMULTANEAMENTE ~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::pegarSimultaneamente(char tipo){
+void Calibracao::pegarSimultaneamente(){
 	escolha = ' ';
 	Serial.println();
-	Serial.println("CALIBRAR "+ tipoCompleto);
-	Serial.println("POSICIONE TODOS OS SENSORES PARA PEGAR O " + tipoCompleto);
+	Serial.println("CALIBRAR "+ tipo);
+	Serial.println("POSICIONE TODOS OS SENSORES PARA PEGAR O " + tipo);
+	esperar_Posicionamento();
+
 	
 	while ((escolha != 'V') || (escolha != 'v')) {
 		Serial.println("INSIRA ALGUMA COISA PARA PEGAR OS VALORES.\n");
@@ -87,7 +87,7 @@ void Calibracao::pegarSimultaneamente(char tipo){
 		
 		if ((escolha != 'V') || (escolha != 'v')) continue;
 			
-		if (tipo == 'B') calculeMinimoBranco(
+		if (tipo == "MINIMO BRANCO") calculeMinimoBranco(
 			robo.lerSensorLinhaEsq2(),robo.lerSensorLinhaEsq(),
 			robo.lerSensorLinhaDir(),robo.lerSensorLinhaDir2()							   	
 		);
