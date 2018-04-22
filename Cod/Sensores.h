@@ -77,8 +77,9 @@ public:
 
 	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
 
-	void setMinimoBranco(float valor);
-	void setMaximoPreto(float valor);
+	void setMinimoBranco(float valor_lido);
+	void setMaximoPreto(float valor_lido);
+	float calculeMedia(float minimoBranco,float maximoPreto);
 	float getSeparacao();
 
 
@@ -87,8 +88,17 @@ private:
 	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
 
 	float minimoBranco;
+	/* ?--
+		Variável que guardará o mínimo
+		valor lido para branco de cada sensor de refletância.*/
 	float maximoPreto;
+	/* ?--
+		Variável que guardará o máximo
+		valores lido para branco de cada sensor de refletância.*/
 	float media;
+	/* ?--
+		Variáveis que guardam a média
+		de branco_preto para todos os sensores.*/
 
 };
 
