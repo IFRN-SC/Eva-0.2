@@ -18,13 +18,13 @@ Calibracao::Calibracao() {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::run(){
+void Calibracao::run() {
 	menuCalibracao();
 }
 
 //~~~~~~~~~~~~~~~~~~ MENU INICIAL ~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::menuCalibracao(){
+void Calibracao::menuCalibracao() {
 	while((escolha != 'S') || (escolha != 's')) {
 		
 		Serial.println();
@@ -44,7 +44,7 @@ void Calibracao::menuCalibracao(){
 				break;
 			case 'P':
 			case 'p':
-				tipo = "MAXIMO PRETO"
+				tipo = "MAXIMO PRETO";
 				menuFormaPegarValores();
 				break;
 		}
@@ -53,7 +53,7 @@ void Calibracao::menuCalibracao(){
 
 //~~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR OS VALORES ~~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::menuFormaPegarValores(){
+void Calibracao::menuFormaPegarValores() {
 	while (((escolha != 'S') && (escolha != 's')) && ((escolha != 'U') && (escolha != 'u'))) {
 		Serial.println();
 		Serial.println("CALIBRAR " + tipo);
@@ -71,7 +71,7 @@ void Calibracao::menuFormaPegarValores(){
 
 //~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR SIMULTANEAMENTE ~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::pegarSimultaneamente(){
+void Calibracao::pegarSimultaneamente() {
 	escolha = ' ';
 	Serial.println();
 	Serial.println("CALIBRAR "+ tipo);
@@ -104,7 +104,10 @@ void Calibracao::pegarUmPorUm(char tipo) {
 	while((escolha != 'S') || (escolha != 's')) {
 		Serial.println();
 		Serial.println("PEGAR VALORES PARA" + tipoCompleto);
-		Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR O VALOR");
+		Serial.println("POSICIONE O SENSOR CORRETAMENTE...");
+		esperar_Posicionamento();
+
+		Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR VALORES");
 		Serial.println("[E] maisEsq");
 		Serial.println("[e] Esq");
 		Serial.println("[d] Dir");
@@ -148,6 +151,26 @@ void Calibracao::calculeMaximoPreto(float valorEsq2,float valorEsq,float valorDi
 }
 
 
-void Calibracao::esperarParaLer(){
-	while(!Serial.available()){}
+
+//~~~~~~~~~~~~ FERRAMENTAS ~~~~~~~~~~~~~//
+
+
+void Calibracao::esperar_Posicionamento() {
+	Serial.println();
+	Serial.println("maisEsq		---		Esq 	---		Dir 	---		maisDir");
+	while(!Serial.read()) {
+		Serial.print(robo.lerSensorLinhaEsq2());
+		Serial.print("		---		")
+		Serial.print(robo.lerSensorLinhaEsq());
+		Serial.print("		---		")
+		Serial.print(robo.lerSensorLinhaDir());
+		Serial.print("		---		")
+		Serial.print(robo.lerSensorLinhaDir2());
+		Serial.println()
+		delay(500);
+	}
+}
+
+void Calibracao::esperarParaLer() {
+	while(!Serial.available()) {}
 }
