@@ -43,6 +43,7 @@ void Estrategia::seguirLinha() {
 	else if (sensores.preto_preto_branco_branco())						motores.virarEsquerda();
 	else if (sensores.branco_branco_preto_preto()) 						motores.virarDireita();
 	*/
+
 	//else if (sensores.branco_preto_preto_branco())						passarVerde();
 	else leds.sinalizarConfusao();
 }
@@ -61,6 +62,7 @@ void Estrategia::passarVerde(//int lado) {
 }
 */
 
+/*
 void Estrategia::impulso() {
 	while (sensores.branco_branco_branco_branco()
 		  || 
@@ -71,7 +73,7 @@ void Estrategia::impulso() {
 		robo.acionarMotores(60,60);	
 	}
 	motores.parar(500);
-}
+}*/
 
 void Estrategia::desviarObstaculo(){
 	
@@ -124,26 +126,19 @@ void Estrategia::desviarObstaculo(){
 	motores.avancar();
 }
 
-void Estrategia::alinharObstaculo(char lado){
-	switch (lado){
-		case 'R':
-			while (obstaculoDesalinhado()) {
-				robo.acionarMotores((VEL * 0.10) * (-1),VEL * (-1)); 
-				/*  ^				^				^	 		^  
-					Motor contrário recua com 10% de VEL.
-				*/
-			}
-			break;
-		case 'L':
-			while (obstaculoDesalinhado()) {
-				robo.acionarMotores(VEL * (-1),(VEL * 0.10) * (-1)); 
-				/*  ^				^				^	 		^  
-					Motor contrário recua com 10% de VEL.
-				*/
-			}
-			break;
+void Estrategia::alinharObstaculo(char lado) {
+	if (lado == 'R') {
+		while (obstaculoDesalinhado()) {
+			robo.acionarMotores((VEL * 0.10) * (-1),VEL * (-1)); 
+			// Motor contrário recua com 10% de VEL.
+		}		
+	}	
+	else {
+		while (obstaculoDesalinhado()) {
+		robo.acionarMotores(VEL * (-1),(VEL * 0.10) * (-1));
+		// Motor contrário recua com 10% de VEL.
+		}	
 	}
-	
 }
 
 bool Estrategia::obstaculoDesalinhado(){
