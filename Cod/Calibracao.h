@@ -4,19 +4,6 @@
 #include <robo_hardware.h>
 #include "Sensores.h"
 
-//_______________________
-#define NULLPRETO 0.0	
-#define NULLBRANCO 100.0
-/* ?--
-	CONSTANTES usadas para passar "valores nulos" para as funções
-	de leitura: calculeMinimoBranco(x,x,x,x) && calculeMaximoPreto(x,x,x,x).
-
-	Quando for selecionado a calibração individual ou "Um-Por-Um", só será
-	necessário a obtenção dos valores para um sensor. E temos que passar
-	quatro parâmetros nas funções de leitura, usaremos as CONSTANTES para
-	descartar qualquer leitura. */
-
-
 class Calibracao {
 public:
 	void run();
@@ -25,9 +12,9 @@ private:
 
 	calibracao_dados cali;
 
-	Sensores 
+	Sensores
 	refletancia_lido_esq2, 
-	refletancia_lido_esq2,
+	refletancia_lido_esq,
 	refletancia_lido_dir, 
 	refletancia_lido_dir2;
 
