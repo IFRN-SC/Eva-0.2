@@ -60,13 +60,14 @@ private:
 		"Função ferramenta" - 
 		Usada para esperar a leitura do Serial.*/
 
-	char escolha; // Usado para controlar o fluxo nos menus.
+	char escolha; // Usada para controlar o fluxo nos menus.
+	String tipo; // Usada para determinar se será lido branco ou preto.
 	
 	//~~~ FORMA DE PEGAR OS VALORES ~~~//
 	
-	void menuFormaPegarValores(String tipo);
-	void pegarUmPorUm(String tipo);
-	void pegarSimultaneamente(String tipo);
+	void menuFormaPegarValores();
+	void pegarUmPorUm();
+	void pegarSimultaneamente();
 	
 	void calculeMinimoBranco(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
 	void calculeMaximoPreto(float valorEsq2,float valorEsq,float valorDir,float valorDir2);
