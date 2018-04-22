@@ -100,10 +100,10 @@ void Calibracao::pegarSimultaneamente() {
 
 //~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR UM POR UM ~~~~~~~~~~~~~~~~~~//
 
-void Calibracao::pegarUmPorUm(char tipo) {
+void Calibracao::pegarUmPorUm() {
 	while((escolha != 'S') || (escolha != 's')) {
 		Serial.println();
-		Serial.println("PEGAR VALORES PARA" + tipoCompleto);
+		Serial.println("PEGAR VALORES PARA" + tipo);
 		Serial.println("POSICIONE O SENSOR CORRETAMENTE...");
 		esperar_Posicionamento();
 
@@ -118,19 +118,19 @@ void Calibracao::pegarUmPorUm(char tipo) {
 
 		switch (escolha) {
 			case 'E': // Pega valor do sensor maisEsq e descarta a leitura dos outros sensores.
-				if (tipo == 'B') calculeMinimoBranco( robo.lerSensorLinhaEsq2() ,NULLBRANCO ,NULLBRANCO ,NULLBRANCO);
+				if (tipo == "MINIMO BRANCO") calculeMinimoBranco( robo.lerSensorLinhaEsq2() ,NULLBRANCO ,NULLBRANCO ,NULLBRANCO);
 				else 			  calculeMaximoPreto( robo.lerSensorLinhaEsq2() ,NULLPRETO,NULLPRETO,NULLPRETO);
 				break;
 			case 'e': // Pega valor do sensor Esq e descarta a leitura dos outros sensores.
-				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO, robo.lerSensorLinhaEsq() ,NULLBRANCO,NULLBRANCO);
+				if (tipo == "MINIMO BRANCO") calculeMinimoBranco(NULLBRANCO, robo.lerSensorLinhaEsq() ,NULLBRANCO,NULLBRANCO);
 				else 			   calculeMaximoPreto(NULLPRETO, robo.lerSensorLinhaEsq() ,NULLPRETO,NULLPRETO);
 				break;
 			case 'd': // Pega valor do sensor Dir e descarta a leitura dos outros sensores.
-				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() ,NULLBRANCO);
+				if (tipo == "MINIMO BRANCO") calculeMinimoBranco(NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() ,NULLBRANCO);
 				else                calculeMaximoPreto(NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() ,NULLPRETO);
 				break;
 			case 'D': // Pega valor do sensor maisDir e descarta a leitura dos outros sensores.
-				if (tipo == 'B') calculeMinimoBranco(NULLBRANCO,NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() );
+				if (tipo == "MINIMO BRANCO") calculeMinimoBranco(NULLBRANCO,NULLBRANCO,NULLBRANCO, robo.lerSensorLinhaDir() );
 				else                 calculeMaximoPreto(NULLPRETO,NULLPRETO,NULLPRETO, robo.lerSensorLinhaDir() );
 				break;
 		}
@@ -160,13 +160,13 @@ void Calibracao::esperar_Posicionamento() {
 	Serial.println("maisEsq		---		Esq 	---		Dir 	---		maisDir");
 	while(!Serial.read()) {
 		Serial.print(robo.lerSensorLinhaEsq2());
-		Serial.print("		---		")
+		Serial.print("		---		");
 		Serial.print(robo.lerSensorLinhaEsq());
-		Serial.print("		---		")
+		Serial.print("		---		");
 		Serial.print(robo.lerSensorLinhaDir());
-		Serial.print("		---		")
+		Serial.print("		---		");
 		Serial.print(robo.lerSensorLinhaDir2());
-		Serial.println()
+		Serial.println();
 		delay(500);
 	}
 }
