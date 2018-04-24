@@ -15,9 +15,10 @@ void Estrategia::calibrar(bool value) {
 		Verifica se queremos calibrar os valores. Passado 4 segundos,
 		se não insrirmos algo no Serial, o robô irá continuar com os valores
 		salvos na EEPROM.*/
-	Serial.println("INSIRA ALGUMA COISA PARA CALIBRAR");
+	Serial.println(F("INSIRA ALGUMA COISA PARA CALIBRAR"));
 	for (int i=10; i>=0; i--) {
-		Serial.println("Tentativa " + i);
+		Serial.print(F("Tentativa "));
+		Serial.println(i);
 		delay(400);
 		if (Serial.available()) {
 			Serial.read();
