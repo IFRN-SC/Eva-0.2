@@ -6,8 +6,10 @@
 
 class Calibracao {
 public:
+	
 	void run();
 	Calibracao();
+
 private:
 
 	calibracao_dados cali;
@@ -46,6 +48,7 @@ private:
 	void menuFormaPegarValores();
 	void pegarUmPorUm();
 	void pegarSimultaneamente();
+
 };
 
 #endif
