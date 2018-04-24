@@ -19,13 +19,12 @@ void Calibracao::run() {
 void Calibracao::menuCalibracao() {
 	while(!save) {
 		
-		Serial.println();
-		Serial.println("[---| MENU CALIBRACAO |---]");
-		Serial.println("O QUE DESEJAS SENHOR?");
-		Serial.println("[B] MINIMO BRANCO.");
-		Serial.println("[P] MAXIMO PRETO.");
-		Serial.println("[S] SALVAR.");
-		Serial.println("[D] DESCARTAR CALIBRACAO");
+		Serial.println(F("[---| MENU CALIBRACAO |---]"));
+		Serial.println(F("O QUE DESEJAS SENHOR?"));
+		Serial.println(F("[B] MINIMO BRANCO."));
+		Serial.println(F("[P] MAXIMO PRETO."));
+		Serial.println(F("[S] SALVAR."));
+		Serial.println(F("[D] DESCARTAR CALIBRACAO"));
 		esperarParaLer();
 		escolha = Serial.read();
 
@@ -50,10 +49,10 @@ void Calibracao::menuCalibracao() {
 	}
 	if ((escolha != 'D') && (escolha != 'd')) {
 
-		cali.refletancia_mais_esq = refletancia_lido_esq2.getSeparacao();
-		cali.refletancia_esq = refletancia_lido_esq.getSeparacao();
-		cali.refletancia_dir = refletancia_lido_dir.getSeparacao();
-		cali.refletancia_mais_dir = refletancia_lido_dir2.getSeparacao();
+		cali.refletancia_mais_esq	= refletancia_lido_esq2.getSeparacao();
+		cali.refletancia_esq 		= refletancia_lido_esq.getSeparacao();
+		cali.refletancia_dir 		= refletancia_lido_dir.getSeparacao();
+		cali.refletancia_mais_dir 	= refletancia_lido_dir2.getSeparacao();
 
 		robo.salvarCalibracao(cali);	
 	}
@@ -65,11 +64,12 @@ void Calibracao::menuFormaPegarValores() {
 	while (!exit) {
 
 		Serial.println();
-		Serial.println("CALIBRAR " + tipo);
-		Serial.println("DE QUE FORMA QUERES PEGAR OS VALORES?");
-		Serial.println("[S] TODOS OS SENSORES SIMULTANEAMENTE");
-		Serial.println("[U] UM POR UM");
-		Serial.println("[V] VOLTAR");
+		Serial.print(F("CALIBRAR "));
+		Serial.println(tipo);
+		Serial.println(F("DE QUE FORMA QUERES PEGAR OS VALORES?"));
+		Serial.println(F("[S] TODOS OS SENSORES SIMULTANEAMENTE"));
+		Serial.println(F("[U] UM POR UM"));
+		Serial.println(F("[V] VOLTAR"));
 		esperarParaLer();
 		escolha = Serial.read();
 		
@@ -85,15 +85,16 @@ void Calibracao::menuFormaPegarValores() {
 //~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR SIMULTANEAMENTE ~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::pegarSimultaneamente() {
-	Serial.println();
-	Serial.println("CALIBRAR "+ tipo);
-	Serial.println("POSICIONE TODOS OS SENSORES PARA PEGAR O " + tipo);
+	Serial.print(F("CALIBRAR "));
+	Serial.println(tipo);
+	Serial.print(F("POSICIONE TODOS OS SENSORES PARA PEGAR O "));
+	Serial.println(tipo);
 	esperar_Posicionamento();
 
 	
 	while (!exit) {
-		Serial.println("INSIRA ALGUMA COISA PARA PEGAR OS VALORES.\n");
-		Serial.println("[V] VOLTAR");
+		Serial.println(F("INSIRA ALGUMA COISA PARA PEGAR OS VALORES.\n"));
+		Serial.println(F("[V] VOLTAR"));
 		esperarParaLer();
 		escolha = Serial.read();
 		
@@ -118,18 +119,18 @@ void Calibracao::pegarSimultaneamente() {
 
 void Calibracao::pegarUmPorUm() {
 	while((escolha != 'S') || (escolha != 's')) {
-		Serial.println();
-		Serial.println("PEGAR VALORES PARA" + tipo);
-		Serial.println("POSICIONE O SENSOR CORRETAMENTE...");
+		Serial.print(F("PEGAR VALORES PARA")); 
+		Serial.println(tipo);
+		Serial.println(F("POSICIONE O SENSOR CORRETAMENTE..."));
 		esperar_Posicionamento();
 
 		Serial.println();
-		Serial.println("ESCOLHA QUAL SENSOR QUERES PEGAR VALORES");
-		Serial.println("[E] maisEsq");
-		Serial.println("[e] Esq");
-		Serial.println("[d] Dir");
-		Serial.println("[D] maisDir");+
-		Serial.println("[S] SALVAR");
+		Serial.println(F("ESCOLHA QUAL SENSOR QUERES PEGAR VALORES"));
+		Serial.println(F("[E] maisEsq"));
+		Serial.println(F("[e] Esq"));
+		Serial.println(F("[d] Dir"));
+		Serial.println(F("[D] maisDir"));
+		Serial.println(F("[S] SALVAR"));
 		esperarParaLer();
 		escolha = Serial.read();
 
@@ -158,15 +159,15 @@ void Calibracao::pegarUmPorUm() {
 
 
 void Calibracao::esperar_Posicionamento() {
-	Serial.println("INSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE.");
-	Serial.println("maisEsq		---		Esq 	---		Dir 	---		maisDir");
+	Serial.println(F("INSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE."));
+	Serial.println(F("maisEsq		---		Esq 	---		Dir 	---		maisDir"));
 	while(!Serial.read()) {
 		Serial.print(robo.lerSensorLinhaEsq2());
-		Serial.print("		---		");
+		Serial.print(F("		---		"));
 		Serial.print(robo.lerSensorLinhaEsq());
-		Serial.print("		---		");
+		Serial.print(F("		---		"));
 		Serial.print(robo.lerSensorLinhaDir());
-		Serial.print("		---		");
+		Serial.print(F("		---		"));
 		Serial.print(robo.lerSensorLinhaDir2());
 		Serial.println();
 		delay(500);
