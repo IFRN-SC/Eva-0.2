@@ -11,7 +11,7 @@ void Calibracao::run() { menuCalibracao(); }
 //~~~~~~~~~~~~~~~~~~ MENU INICIAL ~~~~~~~~~~~~~~~~~~//
 
 void Calibracao::menuCalibracao() {
-	while((escolha != 'S') && (escolha != 's') && (escolha != 'D') && (escolha != 'd')) {
+	while (((escolha != 'S') && (escolha != 'D')) && ((escolha != 's') && (escolha != 'd'))) {
 		
 		Serial.println(F("\n[---| MENU CALIBRACAO |---]"));
 		Serial.println(F("O QUE DESEJAS SENHOR?"));
@@ -35,6 +35,7 @@ void Calibracao::menuCalibracao() {
 				break;
 		}
 	}
+
 	if ((escolha != 'D') && (escolha != 'd')) {
 
 		cali.refletancia_mais_esq	= refletancia_lido_esq2.getSeparacao();
@@ -42,8 +43,8 @@ void Calibracao::menuCalibracao() {
 		cali.refletancia_dir 		= refletancia_lido_dir.getSeparacao();
 		cali.refletancia_mais_dir 	= refletancia_lido_dir2.getSeparacao();
   
-		Serial.println(F("Calibracao salva com sucesso!"));
 		robo.salvarCalibracao(cali);
+		Serial.println(F("Calibracao salva com sucesso!"));
 	} else {
 		Serial.println(F("Calibracao descartada."));
 	}
@@ -115,8 +116,6 @@ void Calibracao::pegarSimultaneamente() {
 			Serial.println();
 		}
 	}
-	escolha = ' ';
-	menuCalibracao();
 }
 
 //~~~~~~~~~~~~~~~~~~ FORMA DE PEGAR UM POR UM ~~~~~~~~~~~~~~~~~~//
@@ -128,7 +127,7 @@ void Calibracao::pegarUmPorUm() {
 	Serial.print(F("PEGAR VALORES PARA ")); 
 	Serial.println(tipo);
 
-	while ((escolha != 'S') && (escolha != 's')) {
+	while ((escolha != 'V') && (escolha != 'v')) {
 
 		Serial.println();
 		Serial.println(F("ESCOLHA QUAL SENSOR QUERES PEGAR VALORES"));
@@ -136,11 +135,12 @@ void Calibracao::pegarUmPorUm() {
 		Serial.println(F("[e] Esq"));
 		Serial.println(F("[d] Dir"));
 		Serial.println(F("[D] maisDir"));
-		Serial.println(F("[S] SALVAR"));
+		Serial.println(F("[V] VOLTAR"));
 		esperarParaLer();
 		escolha = Serial.read();
-		
-		while ( (escolha != 'V') && (escolha != 'v'))	{
+		sensor = escolha;
+
+		while ((escolha != 'V') && (escolha != 'v'))	{
 			Serial.println(F("POSICIONE O SENSOR CORRETAMENTE..."));
 			esperar_Posicionamento();
 			
@@ -158,8 +158,10 @@ void Calibracao::pegarUmPorUm() {
 					else {
 						refletancia_lido_esq.setMaximoPreto(robo.lerSensorLinhaEsq());
 					}	
+					escolha = ' ';				 
 					Serial.println(F("\n(maisEsq)"));
-					Serial.print(robo.lerSensorLinhaDir());				 
+					Serial.print(robo.lerSensorLinhaEsq2());
+					Serial.println();
 					break;					
 
 				case 'e': // Pega SOMENTE o valor do sensor Esq e descarta a leitura dos outros sensores.
@@ -169,8 +171,10 @@ void Calibracao::pegarUmPorUm() {
 					else {
 						refletancia_lido_esq.setMaximoPreto(robo.lerSensorLinhaEsq());
 					}
+					escolha = ' ';
 					Serial.println(F("\n(Esq)"));
-					Serial.print(robo.lerSensorLinhaDir());					 
+					Serial.print(robo.lerSensorLinhaEsq());	
+					Serial.println();				 
 					break;
 				
 				case 'd': // Pega SOMENTE o  valor do sensor Dir e descarta a leitura dos outros sensores.
@@ -180,8 +184,10 @@ void Calibracao::pegarUmPorUm() {
 					else {
 						refletancia_lido_dir.setMaximoPreto(robo.lerSensorLinhaDir());		
 					}
+					escolha = ' ';
 					Serial.println(F("\n(Dir)"));
-					Serial.print(robo.lerSensorLinhaDir()); 						 
+					Serial.print(robo.lerSensorLinhaDir()); 
+					Serial.println();						 
 					break;
 				
 				case 'D': // Pega SOMENTE o  valor do sensor maisDir e descarta a leitura dos outros sensores.
@@ -191,15 +197,15 @@ void Calibracao::pegarUmPorUm() {
 					else {
 						refletancia_lido_dir2.setMaximoPreto(robo.lerSensorLinhaDir2());						
 					}
+					escolha = ' ';
 					Serial.println(F("\n(maisDir)"));
-					Serial.print(robo.lerSensorLinhaDir2());				
+					Serial.print(robo.lerSensorLinhaDir2());
+					Serial.println();				
 					break;
 			}
 			Serial.println();
 		}
 	}
-	escolha = ' ';
-	menuCalibracao();
 }
 
 //~~~~~~~~~~~~ FERRAMENTAS ~~~~~~~~~~~~~//
