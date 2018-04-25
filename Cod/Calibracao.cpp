@@ -120,11 +120,8 @@ void Calibracao::pegarUmPorUm() {
 	Serial.println();
 	Serial.print(F("PEGAR VALORES PARA ")); 
 	Serial.println(tipo);
-	//Serial.println(F("POSICIONE O SENSOR CORRETAMENTE..."));
-	//esperar_Posicionamento();
-
-
-	while ((escolha != 'S') || (escolha != 's')) {
+	
+	while ((escolha != 'S') && (escolha != 's')) {
 
 		Serial.println();
 		Serial.println(F("ESCOLHA QUAL SENSOR QUERES PEGAR VALORES"));
@@ -135,39 +132,8 @@ void Calibracao::pegarUmPorUm() {
 		Serial.println(F("[S] SALVAR"));
 		esperarParaLer();
 		escolha = Serial.read();
-
-		/*
-		if (tipo == "MINIMO BRANCO") {
-			if (escolha == 'E') {
-				refletancia_lido_esq2.setMinimoBranco(robo.lerSensorLinhaEsq2());
-				
-				Serial.println(F("\n(maisEsq)"));
-				Serial.print(robo.lerSensorLinhaEsq2());
-			}
-			else if (escolha == 'e') {
-				refletancia_lido_esq2.setMaximoPreto(robo.lerSensorLinhaEsq2());
-			
-				Serial.println(F("\n(Esq)"));
-				Serial.print(robo.lerSensorLinhaEsq());
-			}
-			else if (escolha == 'd') {
-
-			}
-		}
-		if (escolha == 'E') {
-			if (tipo == "MINIMO BRANCO") {
-				
-			}
-			else {
-				
-			}
-			
-			break;
-		} else if (escolha == 'e') {
-
-		}
 		
-		while ( (escolha != 'S') || (escolha != 's'))	{
+		while ( (escolha != 'V') && (escolha != 'v'))	{
 			Serial.println(F("POSICIONE O SENSOR CORRETAMENTE..."));
 			esperar_Posicionamento();
 			
@@ -178,8 +144,16 @@ void Calibracao::pegarUmPorUm() {
 			escolha = Serial.read();
 	
 			switch (sensor) {
-				case 'E': 
-					
+				case 'E': 	
+					if (tipo == "MINIMO BRANCO") {
+						refletancia_lido_esq.setMinimoBranco(robo.lerSensorLinhaEsq());
+					}
+					else {
+						refletancia_lido_esq.setMaximoPreto(robo.lerSensorLinhaEsq());
+					}	
+					Serial.println(F("\n(maisEsq)"));
+					Serial.print(robo.lerSensorLinhaDir());				 
+					break;					
 
 				case 'e': // Pega valor do sensor Esq e descarta a leitura dos outros sensores.
 					if (tipo == "MINIMO BRANCO") {
@@ -188,9 +162,9 @@ void Calibracao::pegarUmPorUm() {
 					else {
 						refletancia_lido_esq.setMaximoPreto(robo.lerSensorLinhaEsq());
 					}
-										 
+					Serial.println(F("\n(Esq)"));
+					Serial.print(robo.lerSensorLinhaDir());					 
 					break;
-
 				
 				case 'd': // Pega valor do sensor Dir e descarta a leitura dos outros sensores.
 					if (tipo == "MINIMO BRANCO") {
@@ -215,7 +189,7 @@ void Calibracao::pegarUmPorUm() {
 					break;
 			}
 			Serial.println();
-		}*/
+		}
 	}
 	escolha = ' ';
 	menuCalibracao();
