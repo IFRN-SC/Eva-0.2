@@ -28,7 +28,7 @@ void Estrategia::calibrar(bool value) {
 		}
 	}
 
-	robo.lerCalibracao(cali);
+	//robo.lerCalibracao(cali);
 }
 
 void Estrategia::seguirLinha() {
