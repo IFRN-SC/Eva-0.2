@@ -10,9 +10,12 @@ public:
 	void run();
 	Calibracao();
 
-private:
-
+	//inline calibracao_dados getCali(){return cali;}
 	calibracao_dados cali;
+
+private:	
+
+	//calibracao_dados cali;
 
 	Sensores
 	refletancia_lido_esq2, 
