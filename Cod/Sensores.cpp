@@ -174,7 +174,7 @@ bool Sensores::preto_branco_branco_preto() {
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//~~~~~~~~~~~~~~~~~~~~~~~~~ INDIVIDUAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~~~~~~~~~~~~~~~~~~~~-	 INDIVIDUAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 bool Sensores::maisEsqViuBranco() {
 	return (robo.lerSensorLinhaEsq2() > separacao.refletancia_mais_esq);  
