@@ -22,9 +22,13 @@ void Estrategia::calibrar(bool value) {
 		delay(400);
 		if (Serial.available()) {
 			Serial.read();
+			Serial.println();
 			calibracao.run();
+			i = 11;
 		}
 	}
+
+	robo.lerCalibracao(cali);
 }
 
 void Estrategia::seguirLinha() {
