@@ -104,7 +104,7 @@ void Calibracao::pegarSimultaneamente() {
 				refletancia_lido_dir2.setMaximoPreto(robo.lerSensorLinhaDir2());
 			}
 
-			Serial.println(F("(maisEsq)	---		(Esq)		---		(Dir)		---		(maisDir)\n"));
+			Serial.println(F("\n(maisEsq)	---		(Esq)		---		(Dir)		---		(maisDir)\n"));
 			Serial.print(robo.lerSensorLinhaEsq2());
 			Serial.print(F("		---		"));
 			Serial.print(robo.lerSensorLinhaEsq());
