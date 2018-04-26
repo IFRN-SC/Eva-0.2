@@ -2,8 +2,9 @@
 #define SENSORES_H
 
 #include <robo_hardware.h>
+#include "Calibracao.h"
 
-class Sensores {
+class Sensores: public Calibracao {
 public:
 
 	//~~~~~~~~~~~ SONAR ~~~~~~~~~~~//
@@ -14,9 +15,6 @@ public:
 	   se o sonar frontal viu ou não um obstáculo.
 	   A "distância" entre o robô e o obstáculo é 
 	   definida na classe Estrategia.h -*/
-
-
-
 
 	//~~~~~~~~~ SENSORES DE REFLETÂNCIA ~~~~~~~~~//
 
@@ -76,35 +74,32 @@ public:
 
 	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
 
+	/*
 	void setMinimoBranco(float valor_lido);
 	void setMaximoPreto(float valor_lido);
 	void calculeMedia(float minimoBranco,float maximoPreto);
 	float getSeparacao();
-
-
-
+	*/
 
 private:
 
-	calibracao_dados separacao;
+	//calibracao_dados separacao;
 
 	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
 
-	float minimoBranco;
+	//float minimoBranco;
 	/* ?--
 		Variável que guardará o mínimo
 		valor lido para branco de cada sensor de refletância.*/
-	float maximoPreto;
+	//float maximoPreto;
 	/* ?--
 		Variável que guardará o máximo
 		valores lido para branco de cada sensor de refletância.*/
-	float media;
+	//float media;
 	/* ?--
 		Variáveis que guardam a média
 		de branco_preto para todos os sensores.*/
 
 };
-
-static Sensores sensores;
 
 #endif
