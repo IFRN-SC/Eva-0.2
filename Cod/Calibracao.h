@@ -2,7 +2,7 @@
 #define CALIBRACAO_H
 
 #include <robo_hardware.h>
-#include "Sensores.h"
+#include "Sensores_Refletancia.h"
 
 class Calibracao {
 public:
@@ -10,18 +10,11 @@ public:
 	void run();
 	Calibracao();
 
-	//inline calibracao_dados getCali(){return cali;}
-	calibracao_dados cali;
+	void lerValoresCalibrados();
 
 private:	
 
-	//calibracao_dados cali;
-
-	Sensores
-	refletancia_lido_esq2, 
-	refletancia_lido_esq,
-	refletancia_lido_dir, 
-	refletancia_lido_dir2;
+	calibracao_dados cali;
 
 	//~~~~~~~  MENU CALIBRACAO ~~~~~~~//
 	
@@ -52,6 +45,12 @@ private:
 	void pegarUmPorUm();
 	void pegarSimultaneamente();
 
+protected:
+	Sensores_Refletancia
+	refletancia_esq2, 
+	refletancia_esq,
+	refletancia_dir, 
+	refletancia_dir2;
 };
 
 #endif
