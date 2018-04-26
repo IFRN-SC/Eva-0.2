@@ -208,6 +208,16 @@ void Calibracao::pegarUmPorUm() {
 	}
 }
 
+
+void Calibracao::lerValoresCalibrados(){
+	robo.lerCalibracao(cali);
+
+	refletancia_esq2.setMedia(cali.refletancia_mais_esq);
+	refletancia_esq.setMedia(cali.refletancia_mais_esq);
+	refletancia_dir.setMedia(cali.refletancia_mais_esq);
+	refletancia_dir2.setMedia(cali.refletancia_mais_esq);
+}
+
 //~~~~~~~~~~~~ FERRAMENTAS ~~~~~~~~~~~~~//
 
 
