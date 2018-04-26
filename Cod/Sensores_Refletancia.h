@@ -10,6 +10,8 @@ public:
 	void setMaximoPreto(float valor_lido);
 	void setMedia(float minimoBranco, float maximoPreto);
 
+	float getSeparacao();
+
 private:
 
 	float minimoBranco;
