@@ -1,3 +1,4 @@
+
 #include "Estrategia.h"
 
 Estrategia estrategia;
