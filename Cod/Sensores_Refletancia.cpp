@@ -1,15 +1,31 @@
 #include "Sensores_Refletancia.h"
 
+Sensores_Refletancia::Sensores_Refletancia() {
+	minimoBranco = 101;
+	maximoPreto = 0;
+	media = 0;
+}
+
 void Sensores_Refletancia::setMinimoBranco(float valor_lido) {
-	if (valor_lido < minimoBranco) minimoBranco = valor_lido;
+	if (valor_lido < minimoBranco) {
+		minimoBranco = valor_lido;
+		calculeMedia(minimoBranco,maximoPreto);
+	}
 }
 
 void Sensores_Refletancia::setMaximoPreto(float valor_lido) {
-	if (valor_lido > maximoPreto) maximoPreto = valor_lido; 
+	if (valor_lido > maximoPreto){
+	 maximoPreto = valor_lido;
+	 calculeMedia(minimoBranco,maximoPreto);
+	} 
 }
 
 void Sensores_Refletancia::calculeMedia(float minimoBranco,float maximoPreto) {
-	media = ((minimoBranco + maximoPreto)/6);
+	media = ((minimoBranco + maximoPreto)/2);
 }
 
-float Sensores::getSeparacao() { return media; }
+void Sensores_Refletancia::setMedia(float valor_media) {
+	media = valor_media;
+}
+
+float Sensores_Refletancia::getSeparacao() { return media; }
