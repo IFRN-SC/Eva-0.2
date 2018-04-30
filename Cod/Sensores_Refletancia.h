@@ -8,9 +8,13 @@ public:
 
 	void setMinimoBranco(float valor_lido);
 	void setMaximoPreto(float valor_lido);
-	void setMedia(float minimoBranco, float maximoPreto);
+	void calculeMedia(float minimoBranco, float maximoPreto);
+	
+	void setMedia(float valor_media);
 
 	float getSeparacao();
+
+	Sensores_Refletancia();
 
 private:
 
