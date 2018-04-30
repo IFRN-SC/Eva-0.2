@@ -29,6 +29,8 @@ void Estrategia::calibrar(bool value) {
 	}
 
 	calibracao.lerValoresCalibrados();
+	
+	Serial.println("EEMPROM - Estrategia");
 }
 
 void Estrategia::seguirLinha() {
@@ -44,7 +46,7 @@ void Estrategia::seguirLinha() {
 	else if (sensores.preto_preto_branco_branco())						motores.virarEixoEsq();
 	else if (sensores.branco_branco_preto_preto()) 						motores.virarEixoDir();
 
-	/* ?? Se teste virarEixo's falhar:
+	/* ?? Se teste virarEixo's falhar:	
 	else if (sensores.preto_preto_branco_branco())						motores.virarEsquerda();
 	else if (sensores.branco_branco_preto_preto()) 						motores.virarDireita();
 	*/
