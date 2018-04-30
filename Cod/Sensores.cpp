@@ -185,7 +185,7 @@ bool Sensores::maisEsqViuPreto() {
 }
 
 bool Sensores::esqViuBranco() {
-	return (robo.lerSensorLinhaEsq() > refletancia_esq.getSeparacao());  
+	return (robo.lerSensorLinhaEsq() > refletancia_esq.getSeparacao()); 
 }
 
 bool Sensores::esqViuPreto() {
