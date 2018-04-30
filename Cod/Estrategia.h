@@ -78,13 +78,21 @@ private:
 	/* ?--
 		Função que realiza a estratégia do desvio
 		de obstáculos.*/
-	void alinharObstaculo(char lado);// Comentário...?
-	bool obstaculoDesalinhado(); //  Comentário...?
-
+	void alinharObstaculo(char lado);
+	/* ?--
+		Função que alinha o robô após recuar
+		*/
+	bool obstaculoDesalinhado();
+	/* ?--
+		Função que permite sabermos se após o alinhamento
+		referente a linha preta, o robô continua desalinhado.
+		(Eu acho)*/
+	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 	//void passarVerde();
 
+	Sensores sensores;
 	Calibracao calibracao;
 	Motores motores;
 	Leds leds;
