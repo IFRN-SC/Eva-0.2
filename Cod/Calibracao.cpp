@@ -38,6 +38,11 @@ void Calibracao::menuCalibracao() {
 
 	if ((escolha != 'D') && (escolha != 'd')) {
 
+		refletancia_esq2.calculeMedia();
+		refletancia_esq.calculeMedia();
+		refletancia_dir.calculeMedia();
+		refletancia_dir2.calculeMedia();
+		
 		cali.refletancia_mais_esq	= refletancia_esq2.getSeparacao();
 		cali.refletancia_esq 		= refletancia_esq.getSeparacao();
 		cali.refletancia_dir 		= refletancia_dir.getSeparacao();
@@ -222,6 +227,12 @@ void Calibracao::lerValoresCalibrados(){
 	Serial.println(cali.refletancia_esq);
 	Serial.println(cali.refletancia_dir);
 	Serial.println(cali.refletancia_mais_dir);
+
+	Serial.println("GET_SEPARACAO");
+	Serial.println(refletancia_esq2.getSeparacao());
+	Serial.println(refletancia_esq.getSeparacao());
+	Serial.println(refletancia_dir.getSeparacao());
+	Serial.println(refletancia_dir2.getSeparacao());
 }
 
 //~~~~~~~~~~~~ FERRAMENTAS ~~~~~~~~~~~~~//
