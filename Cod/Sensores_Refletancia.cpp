@@ -7,20 +7,14 @@ Sensores_Refletancia::Sensores_Refletancia() {
 }
 
 void Sensores_Refletancia::setMinimoBranco(float valor_lido) {
-	if (valor_lido < minimoBranco) {
-		minimoBranco = valor_lido;
-		calculeMedia(minimoBranco,maximoPreto);
-	}
+	if (valor_lido < minimoBranco) minimoBranco = valor_lido;
 }
 
 void Sensores_Refletancia::setMaximoPreto(float valor_lido) {
-	if (valor_lido > maximoPreto){
-	 maximoPreto = valor_lido;
-	 calculeMedia(minimoBranco,maximoPreto);
-	} 
+	if (valor_lido > maximoPreto) maximoPreto = valor_lido;
 }
 
-void Sensores_Refletancia::calculeMedia(float minimoBranco,float maximoPreto) {
+void Sensores_Refletancia::calculeMedia() {
 	media = ((minimoBranco + maximoPreto)/2);
 }
 
