@@ -3,7 +3,6 @@
  
 #include "Sensores.h"
 /* ?--
-	Objeto "sensores" já instanciado na classe Sensores.h
 
 	Serão usadas as funções que retornam verdadeiro
 	quando os sensores vizualiam preto.
