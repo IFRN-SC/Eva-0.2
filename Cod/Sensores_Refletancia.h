@@ -8,7 +8,7 @@ public:
 
 	void setMinimoBranco(float valor_lido);
 	void setMaximoPreto(float valor_lido);
-	void calculeMedia(float minimoBranco, float maximoPreto);
+	void calculeMedia();
 	
 	void setMedia(float valor_media);
 
