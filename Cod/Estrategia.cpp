@@ -28,7 +28,7 @@ void Estrategia::calibrar(bool value) {
 		}
 	}
 
-	calibracao.lerValoresCalibrados();
+	sensores.lerValoresCalibrados();
 	
 	Serial.println("EEMPROM - Estrategia");
 }
@@ -38,7 +38,8 @@ void Estrategia::seguirLinha() {
 		Se os sensores centrais virem branco, avançarão.
 		Caso contrário, quando um dos sensores ver preto,
 		corrigir a trajetória.*/			
-	/*								
+	/*						
+
 	if (sensores.esqViuBranco() && sensores.dirViuBranco())				motores.avancar();
 	else if (sensores.esqViuPreto() && sensores.dirViuBranco())			motores.virarEsquerda();
 	else if (sensores.esqViuBranco() && sensores.dirViuPreto()) 		motores.virarDireita();
@@ -51,38 +52,18 @@ void Estrategia::seguirLinha() {
 	else if (sensores.preto_preto_branco_branco())						motores.virarEsquerda();
 	else if (sensores.branco_branco_preto_preto()) 						motores.virarDireita();
 	*/
-
-	if (sensores.dirViuBranco()) {
-		Serial.print(F("DIR BRANCO"));
-	} else if (sensores.dirViuPreto()) {
-		Serial.print(F("DIR PRETO"));
-	}
-	if (sensores.esqViuBranco()) {
-		Serial.println(F("ESQ BRANCO"));
-	} else if (sensores.esqViuPreto()) {
-		Serial.println(F("ESQ PRETO"));
-	}
-	delay(1000);
-
-
-
-	/*
+	
 	if (sensores.esqViuBranco() && sensores.dirViuBranco()) {
 		Serial.println(F("ESQ BRANCO - DIR BRANCO"));
-		delay(1000);
 	} else if (sensores.esqViuBranco() && sensores.dirViuPreto()) {
 		Serial.println(F("ESQ BRANCO - DIR PRETO"));
-		delay(1000);
-		//motores.virarDireita();
 	} else if (sensores.esqViuPreto() && sensores.dirViuBranco()) {
 		Serial.println(F("ESQ PRETO - DIR BRANCO"));
-		delay(1000);
-		//motores.virarEsquerda();
 	} else {
 		Serial.println(F("ESQ PRETO - DIR PRETO"));
-		delay(1000);
-		//robo.acionarMotores(0,0);
-	}*/
+	}
+
+	delay(500);
 
 	//else if (sensores.branco_preto_preto_branco())						passarVerde();
 	//else leds.sinalizarConfusao();
