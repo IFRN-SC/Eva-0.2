@@ -11,8 +11,9 @@ public:
 	//~~~~~~~~~~~~ Funções de movimentação básica ~~~~~~~~~~~~~~~~~~//
 	
 	void avancar() { robo.acionarMotores(VEL,VEL); }
-	void virarEsquerda() { robo.acionarMotores(VEL,VEL *(-1)); }
-	void virarDireita() { robo.acionarMotores(VEL *(-1),VEL); }
+	void paraTras() { robo.acionarMotores(VEL * (-1),VEL * (-1)); }
+	void virarEsquerda() { robo.acionarMotores(VEL *(-1),VEL); }
+	void virarDireita() { robo.acionarMotores(VEL,VEL *(-1)); }
 
 	void virarEixoEsq() { robo.acionarMotores(0,VEL); }
 	void virarEixoDir() { robo.acionarMotores(VEL,0); }
