@@ -92,7 +92,7 @@ private:
 	//void passarVerde();
 
 	Sensores sensores;
-	Calibracao calibracao;
+	//Calibracao calibracao; @LENNEDY?
 	Motores motores;
 	Leds leds;
 };
