@@ -31,13 +31,15 @@ public:
 	
 	void piscar(int led){
 		digitalWrite(led,HIGH);
-		delay(300);
+		delay(200);
 		digitalWrite(led,LOW);
 	}
 
 	void sinalizarConfusao() {
 		while(1) {
 			digitalWrite(10, !digitalRead(10));
+			delay(300);
+			digitalWrite(11, !digitalRead(11));
 			delay(300);
 		}
 	}
