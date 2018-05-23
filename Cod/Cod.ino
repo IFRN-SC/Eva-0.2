@@ -18,8 +18,8 @@ void setup(){
 		*/
 	estrategia.calibrar(true);
 	/* ?--
-	  Determina se será feita a calibracao
-	  da separação-branco-preto.*/
+	  Determina se será feita a calibração.
+	  */
 }
 
 void loop(){
