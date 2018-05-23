@@ -38,7 +38,7 @@
 	Quando o robô não souber o que fazer,
 	ele sinalizará - sinalizarConfusao()
 	por meio de led's ou afins.*/
-#define DISTANCIA_OBSTACULO 30
+#define DISTANCIA_OBSTACULO 10
 /* ?--
 	Define a partir de qual valor retornado pelo
 	sonar frontal o robô irá considerar que há
@@ -88,8 +88,6 @@ private:
 		(Eu acho)*/
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-	void printSensoresRefle();
 
 	//void passarVerde();
 

@@ -6,8 +6,8 @@ void Estrategia::run() {
 		ao valor de DISTANCIA_OBSTACULO, o robô começará
 		a desviar do obstáculo.
 		Se não, somente seguirá a linha.*/
-	/*if (sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))	desviarObstaculo();
-	else*/	seguirLinha();
+	if (sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))	desviarObstaculo();
+	else	seguirLinha();
 }
 
 void Estrategia::calibrar(bool value) {
@@ -29,6 +29,7 @@ void Estrategia::calibrar(bool value) {
 	}
 
 	sensores.lerValoresCalibrados();
+	leds.pinar();
 	
 	Serial.println("EEMPROM - Estrategia");
 }
@@ -39,38 +40,46 @@ void Estrategia::seguirLinha() {
 		Caso contrário, quando um dos sensores ver preto,
 		corrigir a trajetória.*/									
 
-	if (sensores.esqViuBranco() && sensores.dirViuBranco())				motores.avancar();
-	else if (sensores.esqViuPreto() && sensores.dirViuBranco())			motores.virarEsquerda();
-	else if (sensores.esqViuBranco() && sensores.dirViuPreto()) 		motores.virarDireita();
-	else if (sensores.esqViuPreto() && sensores.dirViuPreto()) {
-		motores.avancar();
-		if (sensores.maisEsqViuPreto() && sensores.maisEsqViuPreto()) 	motores.virarEsquerda();
-		else if (sensores.maisEsqViuBranco() && sensores.maisDirViuPreto()) motores.virarDireita();
+	if (sensores.branco_branco_branco_branco())						motores.avancar();
+
+	else if (sensores.branco_preto_branco_branco())					motores.virarEsquerda();
+	else if (sensores.branco_branco_preto_branco())					motores.virarDireita();
+	else if (sensores.branco_preto_preto_branco()) {
+		while(sensores.maisEsqViuBranco() && sensores.maisDirViuBranco()) {motores.avancar();}
+		if (sensores.maisEsqViuPreto() && sensores.maisDirViuBranco()) {
+			motores.virarEsquerda();
+			delay(300);
+		}
+		else if (sensores.maisDirViuBranco() && sensores.maisDirViuPreto()) {
+			motores.virarDireita();
+			delay(300);
+		}
+	}
+	else if (sensores.preto_preto_branco_branco()) {
+		while(sensores.preto_preto_branco_branco()) { motores.avancar(); }
+		while(sensores.dirViuBranco()) { motores.virarEsquerda(); } 
+	}
+	else if (sensores.branco_branco_preto_preto()) {
+		while(sensores.branco_branco_preto_preto()) { motores.avancar(); }
+		while(sensores.dirViuBranco()) { motores.virarDireita(); }  
+	}
+	else if (sensores.preto_preto_preto_branco()) {
+		while(sensores.preto_preto_preto_branco()) { motores.avancar(); }
+		while(sensores.dirViuBranco()) { motores.virarEsquerda(); } 	
+	}
+	else if (sensores.branco_preto_preto_preto()) {
+		while(sensores.branco_preto_preto_preto()) { motores.avancar(); }
+		while(sensores.dirViuBranco()) { motores.virarDireita(); } 
+	} else {
+		motores.parar(0);
 	}
 
-	// ?? Testes virarEixo's
-	//else if (sensores.preto_preto_branco_branco())						motores.virarEixoEsq();
-	//else if (sensores.branco_branco_preto_preto()) 						motores.virarEixoDir();
-
-
-	// ?? Se teste virarEixo's falhar:	
-	else if (sensores.preto_preto_branco_branco()) {
-		motores.virarEsquerda();
-		delay(700);
-	}						
-	else if (sensores.branco_branco_preto_preto()) {
-		motores.virarDireita();
-		delay(700);
-	} 		
-	else if (sensores.preto_preto_preto_branco())						motores.virarEsquerda();
-	else if (sensores.branco_preto_preto_preto())						motores.virarDireita();					
-	else if (sensores.preto_preto_preto_preto())						motores.parar(0);	
-
-
-	//printSensoresRefle();
-
-	//else if (sensores.branco_preto_preto_branco())						passarVerde();
-	//else leds.sinalizarConfusao();
+	/*else {
+		while (1) {
+			motores.parar(0);
+			leds.sinalizarConfusao();	
+		}
+	} */
 }
 
 /*
@@ -87,92 +96,24 @@ void Estrategia::passarVerde(//int lado) {
 }
 */
 
-/*void Estrategia::printSensoresRefle() {
-	// SENSOR REFLETANCIA MAIS ESQUERDO
-	
-	if(sensores.maisEsqViuBranco()) {
-		Serial.print(F("+ ESQ BRANCO - "));
-	} else {
-		Serial.print(F("+ ESQ PRETO - "));
-	}
-
-	// SENSOR REFLETANCIA ESQUERDO
-
-	if(sensores.esqViuBranco()) {
-		Serial.print(F("ESQ BRANCO - "));
-	} else {
-		Serial.print(F("ESQ PRETO - "));
-	}
-
-	// SENSOR REFLETANCIA DIREITO
-	
-	if(sensores.dirViuBranco()) {
-		Serial.print(F("DIR BRANCO - "));
-	} else {
-		Serial.print(F("DIR PRETO - "));
-	}
-
-	// SENSOR REFLETANCIA MAIS DIREITO
-
-	if(sensores.maisDirViuBranco()) {
-		Serial.print(F("+ DIR BRANCO"));
-	} else {
-		Serial.print(F("+ DIR PRETO"));
-	}
-
-	Serial.println(F("\n"));
-	delay(500);
-}*/
-
 void Estrategia::desviarObstaculo(){
-	
-	//piscarLeds();
-	
-	bool pelaDireita; // Se o robô está indo realmente pela direita.
 
-	motores.parar(150);
+	motores.parar(200);
 	motores.recuar(180);
 	
-	while (!sensores.maisDirViuPreto()){
-		robo.acionarMotores(0,VEL * (-1));
-	}
-
-	/**** Verificar melhor lado para ir ****/
-
-	if (sensores.sonarViuObstaculo(3 * DISTANCIA_OBSTACULO)){  // Se é melhor ir para a direita
-		pelaDireita = true;
-		alinharObstaculo('R'); // Right - Direita
-	} 
-	else {	// Se é melhor ir para a esquerda
-
-		while (!sensores.maisDirViuPreto()){
-			robo.acionarMotores(0,VEL);
-		}
-
-		alinharObstaculo('L'); // Left - Esquerda
-	}
-
-	motores.parar(1000);
-	
-	motores.avancar();
-
-
-	// CURVA EXPONENCIAL
-	
-	if(pelaDireita){
-		for (int i=10; i!=0; --i){
-			robo.acionarMotores((VEL * (i/100)),VEL);
-			delay(200);	
-		}
-	} 
-	else {
-		for (int i=10; i!=0; --i){
-			robo.acionarMotores(VEL,(VEL * (i/100)));
-			delay(200);	
-		}
-	}
-	
-	motores.avancar();
+	while (sensores.maisEsqViuBranco()){ motores.virarDireita(); }
+	while (!sensores.preto_preto_preto_preto()) { robo.acionarMotores(0,-45);}
+	delay(100);
+	while (!sensores.branco_branco_branco_branco()) { motores.paraTras(); }
+	motores.parar(400);
+	while (robo.lerSensorSonarLateral() > 10) { motores.avancar(); }
+	motores.parar(400);
+	while (robo.lerSensorSonarLateral() < 10) { motores.avancar(); } 
+	delay(400);
+	motores.parar(400);
+	motores.virarEsquerda();
+	delay(540);
+	while(1) { motores.parar(0); }
 }
 
 void Estrategia::alinharObstaculo(char lado) {
