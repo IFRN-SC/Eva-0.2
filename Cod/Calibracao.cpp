@@ -156,15 +156,15 @@ void Calibracao::pegarUmPorUm() {
 			escolha = Serial.read();
 	
 			switch (sensor) {
-				case 'E':  // Pega SOMENTE o valor do sensor Esq e descarta a leitura dos outros sensores. 	
+				case 'E':  // Pega SOMENTE o valor do sensor esq2 e descarta a leitura dos outros sensores. 	
 					if (tipo == "MINIMO BRANCO") {
-						refletancia_esq.setMinimoBranco(robo.lerSensorLinhaEsq());
+						refletancia_esq.setMinimoBranco(robo.lerSensorLinhaEsq2());
 					}
 					else {
-						refletancia_esq.setMaximoPreto(robo.lerSensorLinhaEsq());
+						refletancia_esq.setMaximoPreto(robo.lerSensorLinhaEsq2());
 					}	
 					escolha = ' ';				 
-					Serial.println(F("\n(maisEsq)"));
+					Serial.println(F("\n(esq2)"));
 					Serial.print(robo.lerSensorLinhaEsq2());
 					Serial.println();
 					break;					
@@ -195,7 +195,7 @@ void Calibracao::pegarUmPorUm() {
 					Serial.println();						 
 					break;
 				
-				case 'D': // Pega SOMENTE o  valor do sensor maisDir e descarta a leitura dos outros sensores.
+				case 'D': // Pega SOMENTE o  valor do sensor dir2 e descarta a leitura dos outros sensores.
 					if (tipo == "MINIMO BRANCO") {
 						refletancia_dir2.setMinimoBranco(robo.lerSensorLinhaDir2());
 					}
@@ -203,7 +203,7 @@ void Calibracao::pegarUmPorUm() {
 						refletancia_dir2.setMaximoPreto(robo.lerSensorLinhaDir2());						
 					}
 					escolha = ' ';
-					Serial.println(F("\n(maisDir)"));
+					Serial.println(F("\n(dir2)"));
 					Serial.print(robo.lerSensorLinhaDir2());
 					Serial.println();				
 					break;
