@@ -205,7 +205,7 @@ bool Sensores::maisDirViuBranco() {
 }   
 
 bool Sensores::maisDirViuPreto() {
-	return (robo.lerSensorLinhaDir2() <= refletancia_dir2.getSeparacao());  
+return (robo.lerSensorLinhaDir2() <= refletancia_dir2.getSeparacao());  
 } 
 
 /*
