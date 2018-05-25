@@ -28,7 +28,10 @@ public:
 		pinMode(11, OUTPUT);
 	}
 
-	
+	void ligar(int led) { digitalWrite(led,HIGH); }
+	void desligar(int led) { digitalWrite(led,LOW); }
+
+
 	void piscar(int led){
 		digitalWrite(led,HIGH);
 		delay(200);
