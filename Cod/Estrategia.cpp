@@ -7,7 +7,17 @@ void Estrategia::run() {
 		a desviar do obstáculo.
 		Se não, somente seguirá a linha.*/
 	if (sensores.sonarViuObstaculo(DISTANCIA_OBSTACULO))	desviarObstaculo();
-	else	seguirLinha();
+	else if (robo.lerSensorSonarLateral() < 15)				seguirLinhaZinha();
+	else													seguirLinha();
+}
+
+void Estrategia::seguirLinhaZinha() {
+	leds.ligar(11);
+	while(!sensores.preto_preto_preto_preto()) {
+		if(sensores.esqViuBranco() && sensores.dirViuBranco()) robo.acionarMotores(80,80);
+		else if (sensores.esqViuPreto() && sensores.dirViuBranco())	robo.acionarMotores(0,80);
+		else if (sensores.esqViuBranco() && sensores.dirViuBranco()) robo.acionarMotores(80,0);	
+	}
 }
 
 void Estrategia::calibrar(bool value) {
@@ -31,7 +41,7 @@ void Estrategia::calibrar(bool value) {
 	sensores.lerValoresCalibrados();
 	leds.pinar();
 	
-	Serial.println("EEMPROM - Estrategia");
+	Serial.println("EEMPROM - Estrategia - (Leitura bem sucedida!)");
 }
 
 void Estrategia::seguirLinha() {
@@ -70,8 +80,6 @@ void Estrategia::seguirLinha() {
 	else if (sensores.branco_preto_preto_preto()) {
 		while(sensores.branco_preto_preto_preto()) { motores.avancar(); }
 		while(sensores.dirViuBranco()) { motores.virarDireita(); } 
-	} else {
-		motores.parar(0);
 	}
 
 	/*else {
@@ -100,20 +108,23 @@ void Estrategia::desviarObstaculo(){
 
 	motores.parar(200);
 	motores.recuar(180);
-	
-	while (sensores.maisEsqViuBranco()){ motores.virarDireita(); }
-	while (!sensores.preto_preto_preto_preto()) { robo.acionarMotores(0,-45);}
-	delay(100);
-	while (!sensores.branco_branco_branco_branco()) { motores.paraTras(); }
-	motores.parar(400);
-	while (robo.lerSensorSonarLateral() > 10) { motores.avancar(); }
+	motores.parar(500);
+	while (sensores.maisEsqViuBranco()) { motores.virarDireita(); }
+	//while (!sensores.preto_preto_preto_preto()) { robo.acionarMotores(0,-45); }
+	while (!sensores.branco_branco_branco_branco()) { motores.avancar(); }
+	while (!sensores.preto_preto_branco_branco()) { robo.acionarMotores(0,-35); }
+	robo.acionarMotores(40,30);
+	delay(300);
 	motores.parar(400);
 	while (robo.lerSensorSonarLateral() < 10) { motores.avancar(); } 
-	delay(400);
 	motores.parar(400);
+	motores.avancar();
+	delay(300);
 	motores.virarEsquerda();
-	delay(540);
-	while(1) { motores.parar(0); }
+	delay(560);
+	while(robo.lerSensorSonarLateral() > 10) { motores.avancar(); }
+	motores.parar(0);
+	loop();
 }
 
 void Estrategia::alinharObstaculo(char lado) {
@@ -134,3 +145,4 @@ void Estrategia::alinharObstaculo(char lado) {
 bool Estrategia::obstaculoDesalinhado(){
 	return (sensores.branco_branco_branco_branco());
 }
+

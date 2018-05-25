@@ -63,10 +63,12 @@ public:
 
 		(SEPARACAO_BRANCO_PRETO -> Calibracao.h).*/
 private:
+
 	void seguirLinha();
 	/* ?--
 		Função que corrige a trajetória do robô
 		caso os sensores virem preto.*/
+	void seguirLinhaZinha();
 
 	//~~~ OBSTÁCULO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 	/* ?--
@@ -90,6 +92,7 @@ private:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 	//void passarVerde();
+	void loop() {while(1){}}
 
 	Sensores sensores;
 	Calibracao calibracao;
