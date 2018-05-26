@@ -8,8 +8,8 @@
 	quando os sensores vizualiam preto.
 
 	   Ex.: 
-	   		1 - sensores.preto_branco_branco_branco() == true;
-		 	2 - sensores.preto_branco_preto_branco() == false;
+	   		1 - sensores.preto_branco_branco_branco() return > true;
+		 	2 - sensores.preto_branco_preto_branco() return > false;
 
 	   		1 - O sensor maisEsq viu preto.
 	   		2 - Os sensores maisEsq e Dir não viram preto.*/
@@ -44,60 +44,72 @@
 	sonar frontal o robô irá considerar que há
 	um obstáculo em sua frente.
 	*/
+#define DISTANCIA_RAMPA 15
+/* ?--
+	Define a partir de qual valor retornado pelo
+	sonar lateral o robô irá considerar que o mesmo 
+	se encontra na rampa.
+	*/
 
 class Estrategia {
-public:
-	void run();
-	/* ?--
-		Principal função da classe Estrategia.
+	public:
+		void sets();
+		void calibrar(bool value);
+		/* ?--
+			Função realizada para calibrar a partir dos
+			sensores de refletância, o valor de SEPARACAO_BRANCO_PRETO.
+
+			(SEPARACAO_BRANCO_PRETO -> Calibracao.h).*/
+		void run();
+		/* ?--
+			Principal função da classe Estrategia.
+			
+			Serão tratada situações em que:
+
+			- Sensores virem preto;
+			- Sensores virem verde;
+			- Sonar detectar obstáculos;*/
 		
-		Serão tratada situações em que:
+	private:
 
-		- Sensores virem preto;
-		- Sensores virem verde;
-		- Sonar detectar obstáculos;*/
-	void calibrar(bool value);
-	/* ?--
-		Função realizada para calibrar a partir dos
-		sensores de refletância, o valor de SEPARACAO_BRANCO_PRETO.
+		void seguirLinha();
+		/* ?--
+			Função que corrige a trajetória do robô
+			caso os sensores virem preto.*/
+		void seguirLinhaZinha();
+		/* ?--
+			Função para quando dectada a rampa,
+			siga a linha com uma alta velocidade.
+			*/
 
-		(SEPARACAO_BRANCO_PRETO -> Calibracao.h).*/
-private:
+		//~~~ OBSTÁCULO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+		/* ?--
+			Aqui estão as funções necessárias para o desvio
+			de obstáculos.*/
 
-	void seguirLinha();
-	/* ?--
-		Função que corrige a trajetória do robô
-		caso os sensores virem preto.*/
-	void seguirLinhaZinha();
+		void desviarObstaculo();
+		/* ?--
+			Função que realiza a estratégia do desvio
+			de obstáculos.*/
+		void alinharObstaculo(char lado);
+		/* ?--
+			Função que alinha o robô após recuar
+			*/
+		bool obstaculoDesalinhado();
+		/* ?--
+			Função que permite sabermos se após o alinhamento
+			referente a linha preta, o robô continua desalinhado.
+			(Eu acho)*/
+		
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-	//~~~ OBSTÁCULO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-	/* ?--
-		Aqui estão as funções necessárias para o desvio
-		de obstáculos.*/
+		//void passarVerde();
+		//void loop() {while(1){}}
 
-	void desviarObstaculo();
-	/* ?--
-		Função que realiza a estratégia do desvio
-		de obstáculos.*/
-	void alinharObstaculo(char lado);
-	/* ?--
-		Função que alinha o robô após recuar
-		*/
-	bool obstaculoDesalinhado();
-	/* ?--
-		Função que permite sabermos se após o alinhamento
-		referente a linha preta, o robô continua desalinhado.
-		(Eu acho)*/
-	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-	//void passarVerde();
-	void loop() {while(1){}}
-
-	Sensores sensores;
-	Calibracao calibracao;
-	Motores motores;
-	Leds leds;
+		Sensores sensores;
+		Calibracao calibracao;
+		Motores motores;
+		Leds leds;
 };
  
  #endif
