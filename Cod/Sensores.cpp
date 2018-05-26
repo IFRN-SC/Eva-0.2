@@ -1,9 +1,26 @@
 #include "Sensores.h"
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~ SONAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~~~~~~~~~~~~~~~~~~~~ SONARES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 bool Sensores::sonarViuObstaculo(int DISTANCIA_OBSTACULO) {
 	return (robo.lerSensorSonarFrontal() <= DISTANCIA_OBSTACULO);
+}
+
+bool Sensores::sonarLateralViuRampa(int DISTANCIA_RAMPA) {
+	if (robo.lerSensorSonarLateral() <= DISTANCIA_RAMPA) { // ! NEW
+		robo.acionarMotores(0,0); // ! NEW
+		delay(300); // ! NEW
+		if (robo.lerSensorSonarLateral() <= DISTANCIA_RAMPA) { // ! NEW
+			leds.piscar(10); // ! NEW
+			return true; // ! NEW
+		} // ! NEW
+		else { // ! NEW
+			leds.piscar(11); // ! NEW
+			return false; // ! NEW
+		}
+
+		//return (robo.lerSensorSonarLateral() <= DISTANCIA_RAMPA);
+	}
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -205,23 +222,5 @@ bool Sensores::maisDirViuBranco() {
 }   
 
 bool Sensores::maisDirViuPreto() {
-return (robo.lerSensorLinhaDir2() <= refletancia_dir2.getSeparacao());  
+	return (robo.lerSensorLinhaDir2() <= refletancia_dir2.getSeparacao());  
 } 
-
-/*
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//~~~~~~~~~~~~~~~~~~~~~~~~~ CALIBRAÇÃO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-void Sensores::setMinimoBranco(float valor_lido) {
-	if (valor_lido < minimoBranco) minimoBranco = valor_lido;
-}
-
-void Sensores::setMaximoPreto(float valor_lido) {
-	if (valor_lido > maximoPreto) maximoPreto = valor_lido; 
-}
-
-void Sensores::calculeMedia(float minimoBranco,float maximoPreto) {
-	media = ((minimoBranco + maximoPreto)/6);
-}
-
-float Sensores::getSeparacao() { return media; }*/

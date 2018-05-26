@@ -10,9 +10,10 @@ public:
 	//~~~~~~~~~~~ SONAR ~~~~~~~~~~~//
 
 	bool sonarViuObstaculo(int DISTANCIA_OBSTACULO);
+	bool sonarLateralViuRampa(int DISTANCIA_RAMPA);
 	/* ?--
-		Função usada para verificar
-	   se o sonar frontal viu ou não um obstáculo.
+	   Funções utilizadas para verificar
+	   se algum dos sonares virem ou não um obstáculo.
 	   A "distância" entre o robô e o obstáculo é 
 	   definida na classe Estrategia.h -*/
 
@@ -68,38 +69,6 @@ public:
 	bool dirViuPreto();
 	bool maisDirViuBranco();
 	bool maisDirViuPreto();
-
-
-
-
-	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
-
-	/*
-	void setMinimoBranco(float valor_lido);
-	void setMaximoPreto(float valor_lido);
-	void calculeMedia(float minimoBranco,float maximoPreto);
-	float getSeparacao();
-	*/
-
-private:
-
-	//calibracao_dados separacao;
-
-	//~~~~~~~~~~~ CALIBRAÇÃO DOS SENSORES ~~~~~~~~~~~//
-
-	//float minimoBranco;
-	/* ?--
-		Variável que guardará o mínimo
-		valor lido para branco de cada sensor de refletância.*/
-	//float maximoPreto;
-	/* ?--
-		Variável que guardará o máximo
-		valores lido para branco de cada sensor de refletância.*/
-	//float media;
-	/* ?--
-		Variáveis que guardam a média
-		de branco_preto para todos os sensores.*/
-
 };
 
 #endif
