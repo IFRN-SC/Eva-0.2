@@ -20,6 +20,7 @@ void setup(){
 	/* ?--
 	  Determina se será feita a calibração.
 	  */
+	estrategia.sets();
 }
 
 void loop(){
