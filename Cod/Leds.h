@@ -34,7 +34,7 @@ public:
 
 	void piscar(int led){
 		digitalWrite(led,HIGH);
-		delay(200);
+		delay(400);
 		digitalWrite(led,LOW);
 	}
 
